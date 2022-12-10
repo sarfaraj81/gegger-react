@@ -17,7 +17,7 @@ import VendorServices from "./Components/FrontView/VendorServices";
 import ProjectList from "./Components/FrontView/ProjectList";
 import VendorDetail from "./Components/FrontView/VendorDetail";
 import ProjectDetail from "./Components/FrontView/ProjectDetail";
-
+import Admin from "./Dashboard/Admin/Admin";
 function App() {
   return (
     <div className="App">
@@ -32,6 +32,7 @@ function App() {
           <Route path="/projects" element={<ProjectList />} />
           <Route path="/vendor_detail" element={<VendorDetail />} />
           <Route path="/project_detail" element={<ProjectDetail />} />
+          <Route path="/admin_dashboard" element={<Admin />} />
         </Routes>
       </BrowserRouter>
       {/* <ProjectListing /> */}
