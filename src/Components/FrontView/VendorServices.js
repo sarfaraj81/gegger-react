@@ -12,8 +12,26 @@ import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import ServiceCard from "./Componenets/ServiceCard";
-
+import useFetch from "../Hooks/useFetch";
+import { Verified } from "@mui/icons-material";
 function VendorServices() {
+  //states
+  const [name, setName] = useState("Tom Cruise");
+  const [title, setTitle] = useState("Electrician");
+  const [rating, setRating] = useState("");
+  const [location, setLocation] = useState("San Diego");
+  const [rate, setRate] = useState(60);
+  const [successRate, setSuccessrate] = useState(95);
+  const [vertified, setVerified] = useState(true);
+  const [picture, setPicture] = useState("");
+
+  //csutom - fetch hook
+  const {
+    error,
+    isPending,
+    data: services,
+  } = useFetch("http://localhost:3010/front/services");
+
   return (
     <>
       <Container className="">
@@ -152,9 +170,46 @@ function VendorServices() {
                 </Col>
               </Row>
               <Row>
-                <ServiceCard />
-                <ServiceCard />
-                <ServiceCard />
+                {services?.data?.map((service) => (
+                  <ServiceCard
+                    name={name}
+                    title={service.title}
+                    rating={rating}
+                    vertified={service.vertified}
+                    location={location}
+                    rate={rate}
+                    successRate={successRate}
+                    id={service.id}
+                  />
+                ))}
+
+                {/* <ServiceCard
+                  name={name}
+                  title={title}
+                  rating={rating}
+                  vertified={Verified}
+                  location={location}
+                  rate={rate}
+                  successRate={successRate}
+                />
+                <ServiceCard
+                  name={name}
+                  title={title}
+                  rating={rating}
+                  vertified={Verified}
+                  location={location}
+                  rate={rate}
+                  successRate={successRate}
+                />
+                <ServiceCard
+                  name={name}
+                  title={title}
+                  rating={rating}
+                  vertified={Verified}
+                  location={location}
+                  rate={rate}
+                  successRate={successRate}
+                /> */}
               </Row>
             </Container>
           </Col>

@@ -8,7 +8,14 @@ import { BsFillPinMapFill } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsFillWalletFill } from "react-icons/bs";
 import { BsClockHistory } from "react-icons/bs";
-function ProjectCard() {
+function ProjectCard({
+  title,
+  description,
+  location,
+  time,
+  budget,
+  datePosted,
+}) {
   return (
     <>
       <Container>
@@ -31,14 +38,8 @@ function ProjectCard() {
                   </Col>
                   <Col md={8} sm={8} xs={8}>
                     <div className="content-for-project">
-                      <h1>Aircraft Mechanic</h1>
-                      <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen book.
-                      </p>
+                      <h1>{title}</h1>
+                      <p>{description}</p>
                     </div>
                   </Col>
                   <Col md={2} sm={2} xs={2}>
@@ -57,25 +58,25 @@ function ProjectCard() {
                         <span>
                           <BsFillPinMapFill />
                         </span>
-                        <p>San Fracisso</p>
+                        <p>{location}</p>
                       </div>
                       <div>
                         <span>
                           <BsClockHistory />
                         </span>
-                        <p>Full Time</p>
+                        <p>{time}</p>
                       </div>
                       <div>
                         <span>
                           <BsFillWalletFill />
                         </span>
-                        <p>$35000-$38000</p>
+                        <p>${budget}</p>
                       </div>
                       <div>
                         <span>
                           <BsFillClockFill />
                         </span>
-                        <p>2 Days ago</p>
+                        <p>{datePosted} Days ago</p>
                       </div>
                     </div>
                   </Col>

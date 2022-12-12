@@ -5,8 +5,16 @@ import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
-function ServiceCard() {
+import useFetch from "../../Hooks/useFetch";
+function ServiceCard({
+  name,
+  title,
+  rating,
+  location,
+  rate,
+  successRate,
+  verified,
+}) {
   return (
     <>
       <Container>
@@ -24,16 +32,22 @@ function ServiceCard() {
                       className="rounded-circle"
                       alt="Avatar"
                     />
-                    <span className="verification-check-tick">
-                      {<BsCheckCircleFill />}
-                    </span>
+                    {verified ? (
+                      <span className="verification-check-tick">
+                        {/* {<BsCheckCircleFill />} */}
+                      </span>
+                    ) : (
+                      <span className="verification-check-tick">
+                        {<BsCheckCircleFill />}
+                      </span>
+                    )}
                   </MDBContainer>
                 </Nav.Link>
 
                 {/* title / subtitle div */}
                 <div className="title-desc-card">
-                  <p>Tom Smith</p>
-                  <p>Electrician</p>
+                  <p>{name}</p>
+                  <p>{title}</p>
                   {/* rating div */}
                   <div className="rating-div">
                     <span>5.0</span>
@@ -65,13 +79,13 @@ function ServiceCard() {
                   </Row>
                   <Row>
                     <Col md={4}>
-                      <p className="black-bold-p-for-card">San Diego</p>
+                      <p className="black-bold-p-for-card">{location}</p>
                     </Col>
                     <Col md={4}>
-                      <p className="black-bold-p-for-card">$60/hr</p>
+                      <p className="black-bold-p-for-card">${rate}/hr</p>
                     </Col>
                     <Col md={4}>
-                      <p className="black-bold-p-for-card">95%</p>
+                      <p className="black-bold-p-for-card">{successRate}%</p>
                     </Col>
                   </Row>
                   <Row>

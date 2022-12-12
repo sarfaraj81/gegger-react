@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
@@ -13,8 +13,23 @@ import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 import ProjectCard from "./Componenets/ProjectCard";
-
+import useFetch from "../Hooks/useFetch";
 function ProjectList() {
+  //csutom - fetch hook
+  const {
+    error,
+    isPending,
+    data: projects,
+  } = useFetch("http://localhost:3010/front/projects");
+  // console.log(projects);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLcoation] = useState("");
+  const [time, setTime] = useState("4 hrs");
+  const [budget, setBudget] = useState("");
+  const [datePosted, setDateposted] = useState(3);
+  const [id, setId] = useState("");
   return (
     <>
       <Container className="">
@@ -169,10 +184,30 @@ function ProjectList() {
                 </Col>
               </Row>
               <Row>
+                {projects?.data?.map((project) => (
+                  <ProjectCard
+                    key={project.key}
+                    title={project.title}
+                    description={project.description}
+                    location={project.location}
+                    time={time}
+                    budget={project.budget}
+                    datePosted={datePosted}
+                    id={id}
+                  />
+                ))}
+                {/* <ProjectCard
+                  title={title}
+                  description={description}
+                  location={location}
+                  time={time}
+                  budget={budget}
+                  datePosted={datePosted}
+                  id={id}
+                />
                 <ProjectCard />
                 <ProjectCard />
-                <ProjectCard />
-                <ProjectCard />
+                <ProjectCard /> */}
               </Row>
             </Container>
           </Col>

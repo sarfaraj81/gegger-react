@@ -11,6 +11,7 @@ const Admin = () => {
   return (
     <div className="admin">
       <Sidebar />
+
       <div className="adminContainer">
         <Title />
         <div className="widgets">
@@ -19,6 +20,7 @@ const Admin = () => {
           <Widget type="earning" />
           <Widget type="balance" />
         </div>
+
         <div className="charts">
           <Featured />
           <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
