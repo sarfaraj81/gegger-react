@@ -30,6 +30,8 @@ function ProjectList() {
   const [budget, setBudget] = useState("");
   const [datePosted, setDateposted] = useState(3);
   const [id, setId] = useState("");
+  const [data, setData] = useState();
+
   return (
     <>
       <Container className="">
@@ -193,7 +195,7 @@ function ProjectList() {
                     time={time}
                     budget={project.budget}
                     datePosted={datePosted}
-                    id={id}
+                    id={project._id}
                   />
                 ))}
                 {/* <ProjectCard

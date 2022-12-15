@@ -10,7 +10,7 @@ import { BsCalendarEvent } from "react-icons/bs";
 
 import GermanyFlag from "../../assets/images/germany.png";
 import { Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 //modal imports
 import {
   MDBBtn,
@@ -25,12 +25,14 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 
+import useFetch from "../Hooks/useFetch";
+
 function VendorDetail() {
   const [varyingState, setVaryingState] = useState("");
   const [varyingModal, setVaryingModal] = useState(false);
   const [varyingRecipient, setVaryingRecipient] = useState("");
   const [varyingMessage, setVaryingMessage] = useState("");
-
+  const [service, setService] = useState();
   const onChangeRecipient = (event) => {
     setVaryingRecipient(event.target.value);
   };
@@ -38,7 +40,36 @@ function VendorDetail() {
   const onChangeMessage = (event) => {
     setVaryingMessage(event.target.value);
   };
+  const { id } = useParams();
 
+  //csutom - fetch hook
+  // const {
+  //   error,
+  //   isPending,
+  //   data: services,
+  // } = useFetch("http://localhost:3010/front/service/details");
+  (async () => {
+    const rawResponse = await fetch(
+      "http://localhost:3010/front/service/details",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ service_id: id, b: "Textual content" }),
+      }
+    );
+    const data = await rawResponse.json();
+    setService(data);
+  })();
+
+  // console.log(service);
+  let ratingLoop = Array.apply(null, { length: service?.data?.rating }).map(
+    Number.call,
+    Number
+  );
+  // console.log(ratingLoop);
   return (
     <>
       <Container fluid className="top-section-container">
@@ -63,31 +94,39 @@ function VendorDetail() {
                   {/* title / subtitle div */}
                   <div className="title-desc-card2">
                     <p>Tom Smith</p>
-                    <p>Electrician</p>
+                    <p>{service?.data?.title}</p>
                     {/* rating div */}
                     <div className="rating-div2">
-                      <span>5.0</span>
+                      <span>{service?.data?.rating}.0</span>
                       <div>
                         <span>
+                          <>
+                            {ratingLoop.map((item) => {
+                              return <BsFillStarFill />;
+                            })}
+                          </>
+                          {/* {}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />}
-                          {<BsFillStarFill />}
-                          {<BsFillStarFill />}
-                          {<BsFillStarFill />}
+                          {<BsFillStarFill />} */}
                         </span>
                       </div>
                       <div className="country-flag-div">
                         <img src={GermanyFlag} alt="flag_icon" />
                         <p>Germany</p>
                       </div>
-                      <div className="verification-btn-div">
-                        <button>
-                          <span>
-                            <BsPatchCheckFill />
-                          </span>
-                          <p>Verified</p>
-                        </button>
-                      </div>
+                      {service?.data?.verified ? (
+                        <div className="verification-btn-div">
+                          <button>
+                            <span>
+                              <BsPatchCheckFill />
+                            </span>
+                            <p>Verified</p>
+                          </button>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </Col>
@@ -233,17 +272,17 @@ function VendorDetail() {
                 <Col md={12} xs={12}>
                   <div className="pagination-div">
                     <nav aria-label="...">
-                      <ul class="pagination pagination-lg">
-                        <li class="page-item active" aria-current="page">
-                          <span class="page-link">1</span>
+                      <ul className="pagination pagination-lg">
+                        <li className="page-item active" aria-current="page">
+                          <span className="page-link">1</span>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             2
                           </a>
                         </li>
-                        <li class="page-item">
-                          <a class="page-link" href="#">
+                        <li className="page-item">
+                          <a className="page-link" href="#">
                             3
                           </a>
                         </li>
@@ -252,7 +291,7 @@ function VendorDetail() {
                   </div>
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col md={12}>
                   <div className="gray-panel">
                     <div>
@@ -263,8 +302,8 @@ function VendorDetail() {
                     </div>
                   </div>
                 </Col>
-              </Row>
-              <Row>
+              </Row> */}
+              {/* <Row>
                 <Col md={12} xs={12}>
                   <div className="employment-history-div">
                     <div className="avatar-div">
@@ -305,49 +344,7 @@ function VendorDetail() {
                     </div>
                   </div>
                 </Col>
-              </Row>
-              <Row className="">
-                <Col md={12} xs={12}>
-                  <div className="employment-history-div ">
-                    <div className="avatar-div">
-                      <MDBContainer className="d-flex ">
-                        <img
-                          src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-                          className="rounded-3 shadow-4"
-                          style={{ width: "100%" }}
-                          alt="Avatar"
-                        />
-                      </MDBContainer>
-                    </div>
-                    <div className="employment-history-details ">
-                      <div className="employment-history-title">
-                        <h3>Airframe and power plant</h3>
-                      </div>
-                      <div className="icon-n-details">
-                        <div>
-                          <span>
-                            <BsBuilding />
-                          </span>
-                          <p>Acodia</p>
-                        </div>
-                        <div>
-                          <span>
-                            <BsFillCalendarFill />
-                          </span>
-                          <p>May 2019 - Present</p>
-                        </div>
-                      </div>
-                      <div className="employment-history-description">
-                        <p>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
+              </Row> */}
             </Container>
           </Col>
           {/* right section */}
@@ -361,17 +358,17 @@ function VendorDetail() {
                   </span>
                 </div>
                 <div className="flex-column">
-                  <span>53</span>
+                  <span>{service?.data?.total_job_count}</span>
                   <span>
                     <p>Jobs Done</p>
                   </span>
                 </div>
-                <div className="flex-column">
+                {/* <div className="flex-column">
                   <span>22</span>
                   <span>
                     <p>Rehired</p>
                   </span>
-                </div>
+                </div> */}
               </div>
               <div className="make-offer-btn">
                 <MDBBtn
@@ -382,15 +379,15 @@ function VendorDetail() {
                   }}
                   className="makeoffer"
                 >
-                  Make an Offer
+                  Hire Me
                 </MDBBtn>
               </div>
               <div className="progress-bar-info-div">
                 <div>
                   <p>88%</p>
-                  <div class="progress">
+                  <div className="progress">
                     <div
-                      class="progress-bar"
+                      className="progress-bar"
                       role="progressbar"
                       style={{ width: "88%" }}
                       aria-valuenow="88"
@@ -403,60 +400,60 @@ function VendorDetail() {
                   </span>
                 </div>
                 <div>
-                  <p>88%</p>
-                  <div class="progress">
+                  <p>{service?.data?.on_budget}%</p>
+                  <div className="progress">
                     <div
-                      class="progress-bar"
+                      className="progress-bar"
                       role="progressbar"
-                      style={{ width: "88%" }}
-                      aria-valuenow="88"
+                      style={{ width: `${service?.data?.on_budget}%` }}
+                      aria-valuenow={service?.data?.on_budget}
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
                   </div>
                   <span>
-                    <p>Job Success</p>
+                    <p>On Budget</p>
                   </span>
                 </div>
                 <div>
-                  <p>88%</p>
-                  <div class="progress">
+                  <p>{service?.data?.on_time}%</p>
+                  <div className="progress">
                     <div
-                      class="progress-bar"
+                      className="progress-bar"
                       role="progressbar"
-                      style={{ width: "88%" }}
-                      aria-valuenow="88"
+                      style={{ width: `${service?.data?.on_time}%` }}
+                      aria-valuenow={service?.data?.on_time}
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
                   </div>
                   <span>
-                    <p>Job Success</p>
+                    <p>On Time</p>
                   </span>
                 </div>
                 <div>
-                  <p>88%</p>
-                  <div class="progress">
+                  <p>100%</p>
+                  <div className="progress">
                     <div
-                      class="progress-bar"
+                      className="progress-bar"
                       role="progressbar"
-                      style={{ width: "88%" }}
+                      style={{ width: "100%" }}
                       aria-valuenow="88"
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>
                   </div>
                   <span>
-                    <p>Job Success</p>
+                    <p>Recommendation</p>
                   </span>
                 </div>
               </div>
               <div className="social-icons-div">
                 <p>Social platforms</p>
                 <div>
-                  <i class="fab fa-google"></i>
-                  <i class="fab fa-linkedin-in"></i>
-                  <i class="fab fa-twitter"></i>
+                  <i className="fab fa-google"></i>
+                  <i className="fab fa-linkedin-in"></i>
+                  <i className="fab fa-twitter"></i>
                 </div>
               </div>
               <div className="geegr-verification-div">
@@ -468,15 +465,18 @@ function VendorDetail() {
                 </button>
               </div>
               <div className="skills-div">
-                <span>Good Communication</span>
-                <span>A high level of techinal undersatnding.</span>
+                {service?.data?.skills.map((skill) => (
+                  <span key={skill.key}>{skill}</span>
+                ))}
+                {/* <span>Good Communication</span>
+                <span>A high level of techinal undersatnding.</span> */}
               </div>
               <div className="Attachment-div">
-                <a href="#" className="attachment-box ripple-effect">
+                <a href="asa" className="attachment-box ripple-effect">
                   <span>Cover Letter</span>
                   <i>PDF</i>
                 </a>
-                <a href="#" className="attachment-box ripple-effect">
+                <a href="asas" className="attachment-box ripple-effect">
                   <span>Contract</span>
                   <i>DOCX</i>
                 </a>

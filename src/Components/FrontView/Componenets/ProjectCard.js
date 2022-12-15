@@ -8,6 +8,7 @@ import { BsFillPinMapFill } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import { BsFillWalletFill } from "react-icons/bs";
 import { BsClockHistory } from "react-icons/bs";
+import { Link } from "react-router-dom";
 function ProjectCard({
   title,
   description,
@@ -15,6 +16,7 @@ function ProjectCard({
   time,
   budget,
   datePosted,
+  id,
 }) {
   return (
     <>
@@ -40,6 +42,9 @@ function ProjectCard({
                     <div className="content-for-project">
                       <h1>{title}</h1>
                       <p>{description}</p>
+                      <div className="link-div">
+                        <Link to={`/project_detail/${id}`}>Learn more</Link>
+                      </div>
                     </div>
                   </Col>
                   <Col md={2} sm={2} xs={2}>

@@ -18,6 +18,8 @@ import ProjectList from "./Components/FrontView/ProjectList";
 import VendorDetail from "./Components/FrontView/VendorDetail";
 import ProjectDetail from "./Components/FrontView/ProjectDetail";
 import Admin from "./Dashboard/Admin/Admin";
+import Login from "./Authenticator/Login/Login";
+import Signup from "./Authenticator/Signup/Signup";
 function App() {
   return (
     <div className="App">
@@ -28,10 +30,12 @@ function App() {
           <Route path="/" element={<Home />} />
           {/* <Home />
           <ServiceList /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/services" element={<VendorServices />} />
           <Route path="/projects" element={<ProjectList />} />
-          <Route path="/vendor_detail" element={<VendorDetail />} />
-          <Route path="/project_detail" element={<ProjectDetail />} />
+          <Route path="/vendor_detail/:id" element={<VendorDetail />} />
+          <Route path="/project_detail/:id" element={<ProjectDetail />} />
           <Route path="/admin_dashboard" element={<Admin />} />
         </Routes>
       </BrowserRouter>

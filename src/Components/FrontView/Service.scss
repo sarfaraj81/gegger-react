@@ -143,7 +143,7 @@ $progress-bar-bg:  #6A2FF9;
         min-height: 46px;
     }
     input::placeholder{
-        padding-left:1em;
+        padding-left:1.3em;
     }
     button{
         background-color: transparent;
@@ -237,6 +237,10 @@ $progress-bar-bg:  #6A2FF9;
     height: 100%;
    p{
      color: $light-gray-p;
+     margin-bottom: 0.5em;
+   }
+   .link-div{
+    margin: 0.2em 0 1em 0;
    }
 }
 .custom-gray-row{
@@ -549,8 +553,9 @@ $progress-bar-bg:  #6A2FF9;
     display: flex;
     flex-direction: row;
     align-items: center;
-   margin-top: 1em;
+   margin-top: 2.5em;
     .flex-column{
+
         border-right: 1px solid $light-gray-p;
         min-height: 130px;
         span{

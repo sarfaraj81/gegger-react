@@ -4,7 +4,7 @@ import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../Hooks/useFetch";
 function ServiceCard({
   name,
@@ -14,6 +14,7 @@ function ServiceCard({
   rate,
   successRate,
   verified,
+  id,
 }) {
   return (
     <>
@@ -91,7 +92,7 @@ function ServiceCard({
                   <Row>
                     <Col md={12}>
                       <div className="btn-div-for-card">
-                        <Link to="/vendor_detail">
+                        <Link to={`/vendor_detail/${id}`}>
                           <button className="geegr-btn">View Profile</button>
                         </Link>
                       </div>

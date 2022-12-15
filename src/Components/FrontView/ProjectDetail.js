@@ -9,7 +9,34 @@ import { BsBuilding } from "react-icons/bs";
 import { BsFillPinMapFill } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import GermanyFlag from "../../assets/images/germany.png";
+import { useParams } from "react-router-dom";
 function ProjectDetail() {
+  const [project, setProject] = useState();
+  const { id } = useParams();
+  (async () => {
+    const rawResponse = await fetch(
+      "http://localhost:3010/front/project/details",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id, b: "Textual content" }),
+      }
+    );
+    const data = await rawResponse.json();
+    setProject(data);
+  })();
+
+  // console.log(id);
+
+  // console.log(project);
+  //rating calculation
+  // console.log(service);
+  let ratingLoop = Array.apply(null, {
+    length: project?.data?.total_rating,
+  }).map(Number.call, Number);
   return (
     <>
       <Container fluid>
@@ -32,8 +59,8 @@ function ProjectDetail() {
                 <Col md={7} xs={7}>
                   {/* title / subtitle div */}
                   <div className="title-desc-card3">
-                    <p>Aircraft Engineer</p>
-                    <p className="">About the engineer</p>
+                    <p>{project?.data?.title}</p>
+                    <p className="">{project?.data?.description}</p>
 
                     {/* rating div */}
                     <div className="rating-div3">
@@ -43,19 +70,22 @@ function ProjectDetail() {
                         </span>
                         <p>Acodia</p>
                       </div>
-                      <span>5.0</span>
+                      <span>{project?.data?.total_rating}.0</span>
                       <div>
                         <span>
+                          {ratingLoop.map((item) => {
+                            return <BsFillStarFill />;
+                          })}
+                          {/* {<BsFillStarFill />}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />}
-                          {<BsFillStarFill />}
-                          {<BsFillStarFill />}
+                          {<BsFillStarFill />} */}
                         </span>
                       </div>
                       <div className="country-flag-div">
                         <img src={GermanyFlag} alt="flag_icon" />
-                        <p>Germany</p>
+                        <p>{project?.data?.location}</p>
                       </div>
                       <div className="verification-btn-div">
                         <button>
@@ -72,7 +102,7 @@ function ProjectDetail() {
                   <div className="project-cost-card-div shadow-sm">
                     <div className="">
                       <p>PROJECT VALUE</p>
-                      <p>$ 340</p>
+                      <p>$ {project?.data?.budget}</p>
                     </div>
                   </div>
                 </Col>
@@ -151,7 +181,7 @@ function ProjectDetail() {
               <Row>
                 <Col md={12} xs={12}>
                   <div className="apply-now-btn-div">
-                    <button>Apply Now</button>
+                    <button>Submit Proposal</button>
                   </div>
                 </Col>
               </Row>

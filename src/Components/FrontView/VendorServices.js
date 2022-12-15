@@ -14,6 +14,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import ServiceCard from "./Componenets/ServiceCard";
 import useFetch from "../Hooks/useFetch";
 import { Verified } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 function VendorServices() {
   //states
   const [name, setName] = useState("Tom Cruise");
@@ -101,7 +102,7 @@ function VendorServices() {
               <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
-                    <p>Hourly Rate</p>
+                    <p>Price Range</p>
                     <Form.Range />
                   </div>
                 </Col>
@@ -115,7 +116,7 @@ function VendorServices() {
                   </div>
                 </Col>
               </Row>
-              <Row>
+              {/* <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div class="add my-4">
                     <i class="fa fa-search"></i>
@@ -129,7 +130,7 @@ function VendorServices() {
                     </button>
                   </div>
                 </Col>
-              </Row>
+              </Row> */}
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
@@ -179,7 +180,7 @@ function VendorServices() {
                     location={location}
                     rate={rate}
                     successRate={successRate}
-                    id={service.id}
+                    id={service._id}
                   />
                 ))}
 

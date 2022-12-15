@@ -4,6 +4,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsBell } from "react-icons/bs";
 import { BsChatLeftText } from "react-icons/bs";
 import { MDBContainer } from "mdb-react-ui-kit";
+import GeegrLogo from "../../assets/images/geegr-logo.png";
 function Header() {
   return (
     <>
@@ -18,14 +19,15 @@ function Header() {
         <Container>
           {/* logo */}
           <Navbar.Brand href="#home" style={{ color: "#6A2FF9" }}>
-            Geegr
+            <img className="logoPng" src={GeegrLogo} alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">For Customer</Nav.Link>
-              <Nav.Link href="#pricing">Find Work</Nav.Link>
-              <NavDropdown title="Services" id="collasible-nav-dropdown">
+              <Nav.Link href="/services">Services</Nav.Link>
+              <Nav.Link href="/projects">Projects</Nav.Link>
+              <Nav.Link href="/admin_dashboard">Dashboard</Nav.Link>
+              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action

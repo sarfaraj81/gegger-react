@@ -8,7 +8,7 @@ function Home() {
     <>
       <HeroSection />
       <CategoryList />
-      <VendorCard />
+      {/* <VendorCard /> */}
     </>
   );
 }
