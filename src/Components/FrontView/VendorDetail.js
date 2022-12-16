@@ -50,7 +50,7 @@ function VendorDetail() {
   // } = useFetch("http://localhost:3010/front/service/details");
   (async () => {
     const rawResponse = await fetch(
-      "http://localhost:3010/front/service/details",
+      process.env.REACT_APP_URL + "/front/service/details",
       {
         method: "POST",
         headers: {

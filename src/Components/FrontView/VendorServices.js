@@ -31,14 +31,14 @@ function VendorServices() {
     error,
     isPending,
     data: services,
-  } = useFetch("http://localhost:3010/front/services");
+  } = useFetch(process.env.REACT_APP_URL + "/front/services");
 
   return (
     <>
       <Container className="">
         <Row>
           {/* controls for searching services starts here */}
-          <Col sm={4}>
+          <Col sm={2} md={2}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
@@ -134,7 +134,7 @@ function VendorServices() {
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
-          <Col md={8} sm={8} xs={8}>
+          <Col md={10} sm={10} xs={10}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>

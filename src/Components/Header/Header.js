@@ -4,17 +4,17 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsBell } from "react-icons/bs";
 import { BsChatLeftText } from "react-icons/bs";
 import { MDBContainer } from "mdb-react-ui-kit";
-import GeegrLogo from "../../assets/images/geegr-logo.png";
+import GeegrLogo from "../../assets/images/geegrLogo.png";
 function Header() {
   return (
     <>
       <Navbar
         collapseOnSelect
         expand="lg"
-        bg="light"
         variant="light"
-        style={{ minHeight: "8vh" }}
+        style={{ minHeight: "8vh", background: "white" }}
         fixed="top"
+        className="shadow"
       >
         <Container>
           {/* logo */}
@@ -27,7 +27,7 @@ function Header() {
               <Nav.Link href="/services">Services</Nav.Link>
               <Nav.Link href="/projects">Projects</Nav.Link>
               <Nav.Link href="/admin_dashboard">Dashboard</Nav.Link>
-              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+              {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
@@ -39,7 +39,7 @@ function Header() {
                 <NavDropdown.Item href="#action/3.4">
                   Separated link
                 </NavDropdown.Item>
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
 
             <Nav

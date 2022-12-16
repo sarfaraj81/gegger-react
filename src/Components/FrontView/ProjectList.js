@@ -20,8 +20,8 @@ function ProjectList() {
     error,
     isPending,
     data: projects,
-  } = useFetch("http://localhost:3010/front/projects");
-  // console.log(projects);
+  } = useFetch(process.env.REACT_APP_URL + "/front/projects");
+  console.log(projects);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -37,14 +37,14 @@ function ProjectList() {
       <Container className="">
         <Row>
           {/* controls for searching services starts here */}
-          <Col sm={4}>
+          <Col sm={2} md={2} xs={2}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
                     <p>Location</p>
-                    <div class="search">
-                      <i class="fa fa-location"></i>
+                    <div className="search">
+                      <i className="fa fa-location"></i>
                       <input
                         type="text"
                         className="form-control z-depth-1"
@@ -56,8 +56,8 @@ function ProjectList() {
               </Row>
               <Row>
                 <Col md={12} sm={12} xs={12}>
-                  <div class="add my-4">
-                    <i class="fa fa-search"></i>
+                  <div className="add my-4">
+                    <i className="fa fa-search"></i>
                     <input
                       type="text"
                       className="form-control z-depth-1"
@@ -149,7 +149,7 @@ function ProjectList() {
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
-          <Col md={8} sm={8} xs={8}>
+          <Col md={10} sm={10} xs={10}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>

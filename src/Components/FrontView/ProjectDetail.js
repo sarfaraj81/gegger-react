@@ -15,7 +15,7 @@ function ProjectDetail() {
   const { id } = useParams();
   (async () => {
     const rawResponse = await fetch(
-      "http://localhost:3010/front/project/details",
+      process.env.REACT_APP_URL + "/front/project/details",
       {
         method: "POST",
         headers: {

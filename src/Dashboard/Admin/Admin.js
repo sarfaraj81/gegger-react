@@ -32,11 +32,11 @@ const Admin = () => {
           <div className="listTitle">Latest Transactions</div>
           <Table />
         </div>
-        <div>
+        {/* <div>
           <button onClick={() => updateToken("satyam_we are good")}>
             Auth Update
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

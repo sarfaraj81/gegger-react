@@ -29,7 +29,9 @@ $progress-bar-bg:  #6A2FF9;
     
     
     }
-
+    .add input::placeholder{
+        font-size: 0.7em;
+    }
 
     .add input:focus{
 
@@ -44,6 +46,7 @@ $progress-bar-bg:  #6A2FF9;
      position: absolute;
      top: 20px;
      left: 16px;
+
 
     }
     .add .fa-location{
@@ -69,9 +72,11 @@ $progress-bar-bg:  #6A2FF9;
         width:100% !important;
         background-color: transparent;
         border-radius: 0.3em;
-        color:black;
+        color:$primary-color-purple;
         border: 1px solid $primary-color-purple;
-        min-height: 60px;
+        min-height: 50px;
+        padding: 0.5em 1em;
+        font-size: 0.9em;
     }
     button:hover{
         width:100% !important;
@@ -125,7 +130,7 @@ $progress-bar-bg:  #6A2FF9;
     margin: 1em auto;
     span{
         position: absolute;
-        top: 51px;
+        top: 50px;
         left: 10px;
         z-index: 100;
     }
@@ -191,16 +196,28 @@ $progress-bar-bg:  #6A2FF9;
     justify-content: space-between;
     align-items: center;
     margin: 2em auto;
-   
+    padding: 0 !important;
 
 }
 .star-icon{
-    margin: 2em auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin: 0 auto auto auto;
     span{
-       background-color: rgb(228, 227, 227);
-       border-radius: 2em;
-       padding:1em;
-       margin: 1em;
+        background-color: rgb(228, 227, 227);
+        border-radius: 15em;
+        height: 5vh;
+        width: 5vh;
+        padding: 1em;
+        margin: 1em;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
        svg{
         color:$light-gray-p;
        }
@@ -212,40 +229,82 @@ $progress-bar-bg:  #6A2FF9;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    margin: 3em auto 1em auto;
+    margin: 1.5em auto 1em auto;
     div{
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        min-height: 100%;
+        width: 20%;
         p{
             margin: 0 0.2em;
         }
         span{
+            min-height: 3vh;
+            min-width: 3vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
             svg{
                 color: $light-gray-p;
+                min-height: 1.5vh;
+                min-width: 1.5vh;
             }
         }
     }
 }
-.content-for-project, .project-card-avatar{
+.project-card-avatar{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    height: 100%;
+    img{
+        height: 4vh;
+    }
+    h1{
+        font-size: 0.8em;
+        font-weight: 600;
+    }
+   p{
+     color: $light-gray-p;
+     margin-bottom: 0.5em;
+     font-size: 0.8em;
+     margin-top: 2em;
+   }
+   .link-div{
+    margin: 0.2em 0 1em 0;
+   }
+}
+.content-for-project{
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     height: 100%;
+    h1{
+        font-size: 0.8em;
+        font-weight: 600;
+    }
    p{
      color: $light-gray-p;
      margin-bottom: 0.5em;
+     font-size: 0.8em;
+     margin-top: 2em;
    }
    .link-div{
     margin: 0.2em 0 1em 0;
    }
 }
 .custom-gray-row{
-    border-top: 1px solid #bdc0c354;
+    // border-top: 1px solid #bdc0c354;
+    background-color: rgb(242, 240, 240);
 }
+//over riding _utility
 
 //service details page
 .title-desc-card2{
