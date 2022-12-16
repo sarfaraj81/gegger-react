@@ -12,13 +12,13 @@ function Header() {
         collapseOnSelect
         expand="lg"
         variant="light"
-        style={{ minHeight: "8vh", background: "white" }}
+        style={{ minHeight: "8vh", height: "10vh", background: "white" }}
         fixed="top"
         className="shadow"
       >
         <Container>
           {/* logo */}
-          <Navbar.Brand href="#home" style={{ color: "#6A2FF9" }}>
+          <Navbar.Brand href="/" style={{ color: "#6A2FF9" }}>
             <img className="logoPng" src={GeegrLogo} alt="logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />

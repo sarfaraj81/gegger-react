@@ -21,7 +21,7 @@ function ServiceCard({
       <Container>
         <Row>
           <Col md={12} sm={12} xs={12}>
-            <div className="service-card-horizontal shadow p-2 bg-white rounded">
+            <div className="service-card-horizontal custom-shadow p-2 bg-white rounded">
               <div className="avatar-title-rating-div">
                 <Nav.Link eventKey={2} href="#memes">
                   <MDBContainer

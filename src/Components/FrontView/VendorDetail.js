@@ -26,7 +26,7 @@ import {
 } from "mdb-react-ui-kit";
 
 import useFetch from "../Hooks/useFetch";
-
+import Wrapper from "../../Utlilities/Wrapper";
 function VendorDetail() {
   const [varyingState, setVaryingState] = useState("");
   const [varyingModal, setVaryingModal] = useState(false);
@@ -70,8 +70,10 @@ function VendorDetail() {
     Number
   );
   // console.log(ratingLoop);
+  const wrapperHeight = "10vh";
   return (
     <>
+      <Wrapper wrapperHeight={wrapperHeight} />
       <Container fluid className="top-section-container">
         {/* top section row */}
         <Row>

@@ -28,10 +28,10 @@ function ProjectCard({
               to={`/project_detail/${id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
-              <div className="work-project-card shadow bg-white rounded">
+              <div className="work-project-card custom-shadow bg-white rounded">
                 <Container fluid className="">
                   <Row className="py-5">
-                    <Col md={2} sm={2} xs={2}>
+                    <Col md={1} sm={1} xs={1}>
                       <div className="project-card-avatar">
                         {/* <MDBContainer className="d-flex justify-content-center">
                           <img
@@ -53,7 +53,7 @@ function ProjectCard({
                         </div> */}
                       </div>
                     </Col>
-                    <Col md={2} sm={2} xs={2}>
+                    <Col md={3} sm={3} xs={3}>
                       <div className="star-icon">
                         <span>
                           {" "}

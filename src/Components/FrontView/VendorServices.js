@@ -15,6 +15,7 @@ import ServiceCard from "./Componenets/ServiceCard";
 import useFetch from "../Hooks/useFetch";
 import { Verified } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import Wrapper from "../../Utlilities/Wrapper";
 function VendorServices() {
   //states
   const [name, setName] = useState("Tom Cruise");
@@ -25,7 +26,7 @@ function VendorServices() {
   const [successRate, setSuccessrate] = useState(95);
   const [vertified, setVerified] = useState(true);
   const [picture, setPicture] = useState("");
-
+  const wrapperHeight = "14vh";
   //csutom - fetch hook
   const {
     error,
@@ -35,10 +36,11 @@ function VendorServices() {
 
   return (
     <>
+      <Wrapper wrapperHeight={wrapperHeight} />
       <Container className="">
         <Row>
           {/* controls for searching services starts here */}
-          <Col sm={2} md={2}>
+          <Col sm={3} md={3}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
@@ -134,7 +136,7 @@ function VendorServices() {
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
-          <Col md={10} sm={10} xs={10}>
+          <Col md={9} sm={9} xs={9}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>

@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Wrapper />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

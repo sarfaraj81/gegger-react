@@ -14,6 +14,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 
 import ProjectCard from "./Componenets/ProjectCard";
 import useFetch from "../Hooks/useFetch";
+import Wrapper from "../../Utlilities/Wrapper";
 function ProjectList() {
   //csutom - fetch hook
   const {
@@ -31,13 +32,14 @@ function ProjectList() {
   const [datePosted, setDateposted] = useState(3);
   const [id, setId] = useState("");
   const [data, setData] = useState();
-
+  const wrapperHeight = "14vh";
   return (
     <>
+      <Wrapper wrapperHeight={wrapperHeight} />
       <Container className="">
         <Row>
           {/* controls for searching services starts here */}
-          <Col sm={2} md={2} xs={2}>
+          <Col sm={3} md={3} xs={3}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
@@ -149,7 +151,7 @@ function ProjectList() {
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
-          <Col md={10} sm={10} xs={10}>
+          <Col md={9} sm={9} xs={9}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
