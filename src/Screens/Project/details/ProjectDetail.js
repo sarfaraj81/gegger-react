@@ -10,7 +10,7 @@ import { BsFillPinMapFill } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
 import GermanyFlag from "../../../assets/images/germany.png";
 import { useParams } from "react-router-dom";
-import Wrapper from "../../Utlilities/Wrapper";
+import Wrapper from "../../../Utlilities/Wrapper";
 function ProjectDetail() {
   const [project, setProject] = useState();
   const { id } = useParams();
@@ -38,9 +38,10 @@ function ProjectDetail() {
   let ratingLoop = Array.apply(null, {
     length: project?.data?.total_rating,
   }).map(Number.call, Number);
-
+  const wrapperHeight = "13vh";
   return (
     <>
+      <Wrapper wrapperHeight={wrapperHeight} />
       <Container fluid>
         <Row>
           <div id="top-section-row" className="shadow-sm">
@@ -52,7 +53,7 @@ function ProjectDetail() {
                       <img
                         src="https://images.unsplash.com/photo-1597589827317-4c6d6e0a90bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                         className="rounded-3"
-                        style={{ width: "50%", margin: "auto 0px" }}
+                        style={{ margin: "auto 0px", minHeight: "10vh" }}
                         alt="Avatar"
                       />
                     </MDBContainer>

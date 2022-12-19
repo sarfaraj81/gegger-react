@@ -14,7 +14,7 @@ import Home from "./Screens/Home/Home";
 
 import ProjectList from "./Screens/Project/List/ProjectList";
 import ServiceDetial from "./Screens/Service/details/ServiceDetail";
-import ProjectDetail from "./Screens/Project/List/ProjectList";
+import ProjectDetail from "./Screens/Project/details/ProjectDetail";
 import Admin from "./Dashboard/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
