@@ -1,10 +1,17 @@
 import "./login.scss";
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-
+import axios from "axios";
 //formik import
 import { Formik } from "formik";
 import * as Yup from "yup";
+
+//imports for login functionalty
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/authSlice";
+import { useEffect } from "react";
 
 // Creating schema
 const schema = Yup.object().shape({
@@ -13,10 +20,26 @@ const schema = Yup.object().shape({
     .email("Invalid email format"),
   password: Yup.string()
     .required("Password is a required field")
-    .min(8, "Password must be at least 8 characters"),
+    .min(3, "Password must be at least 8 characters"),
 });
 
 function Login() {
+  //states
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      login({
+        email: user,
+        password: pwd,
+        token: token,
+      })
+    );
+  }, [user, pwd, token, dispatch]);
   return (
     <Container fluid className="login-container">
       <Row>
@@ -25,9 +48,20 @@ function Login() {
           <Formik
             validationSchema={schema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => {
+            onSubmit={async (values) => {
+              setUser(values.email);
+              setPwd(values.password);
               // Alert the input values of the form that we filled
-              alert(JSON.stringify(values));
+              console.log(values.email, values.password);
+              axios
+                .post(process.env.REACT_APP_URL + "/auth/", { ...values })
+                .then((res) => {
+                  console.log(res);
+                  console.log(res.data);
+                  setToken(res.data.data.token);
+                  setUser(values.email);
+                  setPwd(values.password);
+                });
             }}
           >
             {({

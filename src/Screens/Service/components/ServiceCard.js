@@ -5,7 +5,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
-import useFetch from "../../Hooks/useFetch";
+
 function ServiceCard({
   name,
   title,

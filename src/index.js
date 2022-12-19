@@ -3,15 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
+//context provider
 import { ThemeProvider } from "./Context/ThemeContext";
 import { AuthProvider } from "./Context/AuthContext";
-
+//redux setup
+import configureStore from "./redux/configureStore";
+import { Provider } from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
+    <Provider store={configureStore}>
       <App />
-    </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );
 

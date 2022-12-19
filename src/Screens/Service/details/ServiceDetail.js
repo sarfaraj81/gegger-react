@@ -8,7 +8,7 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { BsBuilding } from "react-icons/bs";
 import { BsCalendarEvent } from "react-icons/bs";
 
-import GermanyFlag from "../../assets/images/germany.png";
+import GermanyFlag from "../../../assets/images/germany.png";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 //modal imports
@@ -25,9 +25,8 @@ import {
   MDBInput,
 } from "mdb-react-ui-kit";
 
-import useFetch from "../Hooks/useFetch";
-import Wrapper from "../../Utlilities/Wrapper";
-function VendorDetail() {
+import Wrapper from "../../../Utlilities/Wrapper";
+function ServiceDetial() {
   const [varyingState, setVaryingState] = useState("");
   const [varyingModal, setVaryingModal] = useState(false);
   const [varyingRecipient, setVaryingRecipient] = useState("");
@@ -86,7 +85,7 @@ function VendorDetail() {
                       <img
                         src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
                         className="rounded-circle"
-                        style={{ width: "50%", margin: "auto 0px" }}
+                        style={{ margin: "1em 0px", minHeight: "10vh" }}
                         alt="Avatar"
                       />
                     </MDBContainer>
@@ -549,4 +548,4 @@ function VendorDetail() {
   );
 }
 
-export default VendorDetail;
+export default ServiceDetial;

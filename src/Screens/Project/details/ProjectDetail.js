@@ -8,7 +8,7 @@ import { BsFillCalendarFill } from "react-icons/bs";
 import { BsBuilding } from "react-icons/bs";
 import { BsFillPinMapFill } from "react-icons/bs";
 import { BsFillClockFill } from "react-icons/bs";
-import GermanyFlag from "../../assets/images/germany.png";
+import GermanyFlag from "../../../assets/images/germany.png";
 import { useParams } from "react-router-dom";
 import Wrapper from "../../Utlilities/Wrapper";
 function ProjectDetail() {

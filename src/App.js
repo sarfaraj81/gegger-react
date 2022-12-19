@@ -9,17 +9,16 @@ import "bootstrap/dist/css/bootstrap.css";
 //footer
 import Footer from "./Components/Footer/Footer";
 //Home module
-import Home from "./Components/Home/Home";
+import Home from "./Screens/Home/Home";
 //Service Listing
 
-import Wrapper from "../src/Utlilities/Wrapper";
-import VendorServices from "./Components/FrontView/VendorServices";
-import ProjectList from "./Components/FrontView/ProjectList";
-import VendorDetail from "./Components/FrontView/VendorDetail";
-import ProjectDetail from "./Components/FrontView/ProjectDetail";
+import ProjectList from "./Screens/Project/List/ProjectList";
+import ServiceDetial from "./Screens/Service/details/ServiceDetail";
+import ProjectDetail from "./Screens/Project/List/ProjectList";
 import Admin from "./Dashboard/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
+import ServiceList from "./Screens/Service/List/ServiceList";
 function App() {
   return (
     <div className="App">
@@ -32,9 +31,9 @@ function App() {
           <ServiceList /> */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/services" element={<VendorServices />} />
+          <Route path="/services" element={<ServiceList />} />
           <Route path="/projects" element={<ProjectList />} />
-          <Route path="/vendor_detail/:id" element={<VendorDetail />} />
+          <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
           <Route path="/project_detail/:id" element={<ProjectDetail />} />
           <Route path="/admin_dashboard" element={<Admin />} />
         </Routes>

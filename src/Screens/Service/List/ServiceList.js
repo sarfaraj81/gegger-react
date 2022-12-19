@@ -11,63 +11,49 @@ import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
-
-import ProjectCard from "./Componenets/ProjectCard";
-import useFetch from "../Hooks/useFetch";
-import Wrapper from "../../Utlilities/Wrapper";
-function ProjectList() {
+import ServiceCard from "../components/ServiceCard";
+import useFetch from "../../../Components/Hooks/useFetch";
+import { Verified } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import Wrapper from "../../../Utlilities/Wrapper";
+function ServiceList() {
+  //states
+  const [name, setName] = useState("Tom Cruise");
+  const [title, setTitle] = useState("Electrician");
+  const [rating, setRating] = useState("");
+  const [location, setLocation] = useState("San Diego");
+  const [rate, setRate] = useState(60);
+  const [successRate, setSuccessrate] = useState(95);
+  const [vertified, setVerified] = useState(true);
+  const [picture, setPicture] = useState("");
+  const wrapperHeight = "14vh";
   //csutom - fetch hook
   const {
     error,
     isPending,
-    data: projects,
-  } = useFetch(process.env.REACT_APP_URL + "/front/projects");
-  console.log(projects);
+    data: services,
+  } = useFetch(process.env.REACT_APP_URL + "/front/services");
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [location, setLcoation] = useState("");
-  const [time, setTime] = useState("4 hrs");
-  const [budget, setBudget] = useState("");
-  const [datePosted, setDateposted] = useState(3);
-  const [id, setId] = useState("");
-  const [data, setData] = useState();
-  const wrapperHeight = "14vh";
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
       <Container className="">
         <Row>
           {/* controls for searching services starts here */}
-          <Col sm={3} md={3} xs={3}>
+          <Col sm={3} md={3}>
             <Container>
               <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
                     <p>Location</p>
-                    <div className="search">
-                      <i className="fa fa-location"></i>
+                    <div class="search">
+                      <i class="fa fa-location"></i>
                       <input
                         type="text"
                         className="form-control z-depth-1"
                         placeholder="Location"
                       />
                     </div>
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col md={12} sm={12} xs={12}>
-                  <div className="add my-4">
-                    <i className="fa fa-search"></i>
-                    <input
-                      type="text"
-                      className="form-control z-depth-1"
-                      placeholder="Add more skills"
-                    />
-                    <button className="btn btn-primary custom-btn-add">
-                      +
-                    </button>
                   </div>
                 </Col>
               </Row>
@@ -94,60 +80,59 @@ function ProjectList() {
                   </div>
                 </Col>
               </Row>
-              {/* <Row>
-                <Col md={12} sm={12} xs={12}>
-                  <div className="my-3">
-                    <p>Job Type</p>
-                    <div className="switch-btn-div">
-                      <Form>
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          label="Freelancer"
-                        />
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          label="Full Time"
-                        />
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          label="Part Time"
-                        />
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          label="Internship"
-                        />
-                        <Form.Check
-                          type="switch"
-                          id="custom-switch"
-                          label="Temporary"
-                        />
-                      </Form>
-                    </div>
-                  </div>
-                </Col>
-              </Row> */}
               <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
-                    <p>Hourly Rate</p>
+                    <p>Keywords</p>
+                    <div class="add">
+                      <i class="fa fa-search"></i>
+                      <input
+                        type="text"
+                        className="form-control z-depth-1"
+                        placeholder="e.g. plumber"
+                      />
+                      <button className="btn btn-primary custom-btn-add">
+                        +
+                      </button>
+                    </div>
+                    <div className="search-skills">
+                      <button>Plumber</button>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+                <Col md={12} sm={12} xs={12}>
+                  <div className="my-3">
+                    <p>Price Range</p>
                     <Form.Range />
                   </div>
                 </Col>
               </Row>
               <Row>
                 <Col md={12} sm={12} xs={12}>
-                  <p>Tags</p>
+                  <p>Skills</p>
                   <div className="my-3 skills-buttons-div">
                     <button>Plumbing</button>
-                    <button>Electrician</button>
-                    <button>Carpenter</button>
+                    <button>Planting</button>
                   </div>
                 </Col>
               </Row>
+              {/* <Row>
+                <Col md={12} sm={12} xs={12}>
+                  <div class="add my-4">
+                    <i class="fa fa-search"></i>
+                    <input
+                      type="text"
+                      className="form-control z-depth-1"
+                      placeholder="Add more skills"
+                    />
+                    <button className="btn btn-primary custom-btn-add">
+                      +
+                    </button>
+                  </div>
+                </Col>
+              </Row> */}
             </Container>
           </Col>
           {/* listing of cards with services starts here */}
@@ -188,30 +173,46 @@ function ProjectList() {
                 </Col>
               </Row>
               <Row>
-                {projects?.data?.map((project) => (
-                  <ProjectCard
-                    key={project.key}
-                    title={project.title}
-                    description={project.description}
-                    location={project.location}
-                    time={time}
-                    budget={project.budget}
-                    datePosted={datePosted}
-                    id={project._id}
+                {services?.data?.map((service) => (
+                  <ServiceCard
+                    name={name}
+                    title={service.title}
+                    rating={rating}
+                    vertified={service.vertified}
+                    location={location}
+                    rate={rate}
+                    successRate={successRate}
+                    id={service._id}
                   />
                 ))}
-                {/* <ProjectCard
+
+                {/* <ServiceCard
+                  name={name}
                   title={title}
-                  description={description}
+                  rating={rating}
+                  vertified={Verified}
                   location={location}
-                  time={time}
-                  budget={budget}
-                  datePosted={datePosted}
-                  id={id}
+                  rate={rate}
+                  successRate={successRate}
                 />
-                <ProjectCard />
-                <ProjectCard />
-                <ProjectCard /> */}
+                <ServiceCard
+                  name={name}
+                  title={title}
+                  rating={rating}
+                  vertified={Verified}
+                  location={location}
+                  rate={rate}
+                  successRate={successRate}
+                />
+                <ServiceCard
+                  name={name}
+                  title={title}
+                  rating={rating}
+                  vertified={Verified}
+                  location={location}
+                  rate={rate}
+                  successRate={successRate}
+                /> */}
               </Row>
             </Container>
           </Col>
@@ -221,4 +222,4 @@ function ProjectList() {
   );
 }
 
-export default ProjectList;
+export default ServiceList;
