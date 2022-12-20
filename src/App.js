@@ -19,12 +19,15 @@ import Admin from "./Dashboard/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
 import ServiceList from "./Screens/Service/List/ServiceList";
+
 function App() {
   return (
     <div className="App">
       <Header />
 
       <BrowserRouter>
+        {/* protected  */}
+
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Home />

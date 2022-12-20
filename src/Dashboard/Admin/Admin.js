@@ -5,40 +5,45 @@ import Featured from "../Components/Featured/Featured";
 import Chart from "../Components/Chart/Chart";
 import Table from "../Components/Table/Table";
 import Title from "../Components/Title_text/Title";
-import { useState } from "react";
-import { useAuth } from "../../Components/Hooks/useAuth";
+import Wrapper from "../../Utlilities/Wrapper";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/authSlice";
+
+const wrapperHeight = "11vh";
 const Admin = () => {
-  const { token, updateToken } = useAuth();
-  console.log(token);
-
+  const data = useSelector(selectUser);
+  console.log(data);
   return (
-    <div className="admin">
-      <Sidebar />
+    <>
+      <Wrapper wrapperHeight={wrapperHeight} />
+      <div className="admin">
+        <Sidebar />
 
-      <div className="adminContainer">
-        <Title />
-        <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
-        </div>
+        <div className="adminContainer">
+          <Title />
+          <div className="widgets">
+            <Widget type="user" />
+            <Widget type="order" />
+            <Widget type="earning" />
+            <Widget type="balance" />
+          </div>
 
-        <div className="charts">
-          <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
-        </div>
-        {/* <div>
+          <div className="charts">
+            <Featured />
+            <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          </div>
+          <div className="listContainer">
+            <div className="listTitle">Latest Transactions</div>
+            <Table />
+          </div>
+          {/* <div>
           <button onClick={() => updateToken("satyam_we are good")}>
             Auth Update
           </button>
         </div> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,13 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   user: null,
-  token: null,
 };
 
 const authSlice = createSlice({
   name: "user",
   initialState,
+
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
@@ -20,7 +20,7 @@ const authSlice = createSlice({
 
 //actions
 export const { login, logout } = authSlice.actions;
-export default authSlice.reducer;
 
-export const selectCurrentUser = (state) => state.auth.user;
-export const selectCurrentToken = (state) => state.auth.token;
+export const selectUser = (state) => state.user.user;
+
+export default authSlice.reducer;

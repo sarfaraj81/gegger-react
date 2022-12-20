@@ -10,7 +10,7 @@
 
     .search input{
 
-     height: 50px;
+     min-height: 60px;
      text-indent: 25px;
      border: 0px solid #d6d4d4;
     
@@ -71,7 +71,7 @@
     min-height: 40vh;
     margin: 0 0 3em 0;
     padding: 20vh 3em;
-    background-image: url(../../assets/images/background3.png);
+    background-image: url(../../../assets/images/background3.png);
     background-size: cover;
     height:100%;
     background-repeat: no-repeat;
