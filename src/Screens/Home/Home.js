@@ -5,7 +5,6 @@ import VendorCard from "./components/VendorCard";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/authSlice";
 function Home() {
-  const user = useSelector(selectUser);
 
   return (
     <>

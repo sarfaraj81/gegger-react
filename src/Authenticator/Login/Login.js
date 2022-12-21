@@ -1,3 +1,4 @@
+import { Link, useNavigate } from 'react-router-dom';
 import "./login.scss";
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
@@ -7,14 +8,12 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 //imports for login functionalty
-
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/authSlice";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../redux/authSlice";
-import { selectUser } from "../../redux/authSlice";
+
+import { signin } from "../../redux/actions/UserActions";
+
 // Creating schema
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -27,16 +26,29 @@ const schema = Yup.object().shape({
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   //states
   // const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
   const [isLoggedin, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
-  const user = useSelector(selectUser);
-  console.log(user);
+  const getState = useSelector((state) => state)
+  console.log(getState);
+
+
+  const {userSignin: userInfo} = useSelector((state) => state);
+  
+  console.log(userInfo);
+
+  useEffect(() => {
+    if (userInfo.isLoggedIn) {
+      navigate('/admin_dashboard')
+    }
+  })
+
 
   return (
     <Container fluid className="login-container">
@@ -47,29 +59,9 @@ function Login() {
             validationSchema={schema}
             initialValues={{ email: "", password: "" }}
             onSubmit={async (values) => {
-              // Alert the input values of the form that we filled
-              console.log(values.email, values.password);
-              axios
-                .post(process.env.REACT_APP_URL + process.env.REACT_APP_LOGIN, {
-                  ...values,
-                })
-                .then((res) => {
-                  setToken(res.data.data.token);
-                  setEmail(values.email);
-                  setPassword(values.password);
-                  setIsLoggedIn(true);
-                  console.log(res);
-                  console.log(res.data);
-                });
-              //on submit
-              dispatch(
-                login({
-                  email: email,
-                  password: password,
-                  token: token,
-                  isLoggedin: true,
-                })
-              );
+               dispatch(
+                signin(values)
+                )
             }}
           >
             {({

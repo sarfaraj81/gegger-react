@@ -7,12 +7,13 @@ import Table from "../Components/Table/Table";
 import Title from "../Components/Title_text/Title";
 import Wrapper from "../../Utlilities/Wrapper";
 import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/authSlice";
 
 const wrapperHeight = "11vh";
 const Admin = () => {
-  const data = useSelector(selectUser);
-  console.log(data);
+  
+  const {userSignin: userInfo} = useSelector((state) => state);
+  
+
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
