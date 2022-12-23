@@ -9,6 +9,8 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 //--------
+import { Container, Navbar, Nav } from "react-bootstrap";
+import GeegrLogo from "../../assets/images/geegrLogo.png";
 function Footer() {
   return (
     <>
@@ -47,14 +49,20 @@ function Footer() {
           <MDBContainer className="text-center text-md-start mt-5">
             <MDBRow className="mt-3">
               <MDBCol md="3" lg="4" xl="3" className="mx-auto mb-4">
-                <h6
+                {/* <h6
                   className="text-uppercase fw-bold mb-4"
                   style={{ color: "#6A2FF9" }}
                 >
                   <MDBIcon color="secondary" icon="gem" className="me-3" />
                   Geegr
-                </h6>
-                <p>
+                </h6> */}
+                <Navbar.Brand
+                  href="/"
+                  style={{ color: "#6A2FF9", margin: "1em" }}
+                >
+                  <img className="logoPng" src={GeegrLogo} alt="logo" />
+                </Navbar.Brand>
+                <p className="mt-4">
                   Here you can use rows and columns to organize your footer
                   content. Lorem ipsum dolor sit amet, consectetur adipisicing
                   elit.

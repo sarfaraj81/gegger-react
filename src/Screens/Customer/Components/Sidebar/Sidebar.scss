@@ -1,5 +1,7 @@
 .sidebar {
-    min-width: 15%;
+    min-width: 15% !important;
+    display: flex;
+    flex-direction: column;
     border-right: 0.5px solid rgb(230, 227, 227);
     min-height: 100vh;
     background-color: white;

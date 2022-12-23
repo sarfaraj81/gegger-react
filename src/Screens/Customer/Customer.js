@@ -1,22 +1,21 @@
-import Sidebar from "../Components/Sidebar/Sidebar";
-import "./Admin.scss";
-import Widget from "../Components/Widget/Widget";
-import Featured from "../Components/Featured/Featured";
-import Chart from "../Components/Chart/Chart";
-import Table from "../Components/Table/Table";
-import Title from "../Components/Title_text/Title";
+import Sidebar from "./Components/Sidebar/Sidebar";
+import "./Customer.scss";
+import Widget from "./Components/Widget/Widget";
+import Featured from "./Components/Featured/Featured";
+import Chart from "./Components/Chart/Chart";
+import Table from "./Components/Table/Table";
+import Title from "./Components/Title_text/Title";
 import Wrapper from "../../Utlilities/Wrapper";
-import { useSelector } from "react-redux";
 
 const wrapperHeight = "11vh";
-const Admin = () => {
+const Customer = () => {
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
-      <div className="admin">
+      <div className="customer">
         <Sidebar />
 
-        <div className="adminContainer">
+        <div className="customerContainer">
           <Title />
           <div className="widgets">
             <Widget type="user" />
@@ -44,4 +43,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Customer;

@@ -19,7 +19,9 @@ import Admin from "./Dashboard/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
 import ServiceList from "./Screens/Service/List/ServiceList";
-
+import Customer from "./Screens/Customer/Customer";
+import Proposals from "./Screens/Customer/Proposals/Proposals";
+import Projects from "./Screens/Customer/Projects/Projects";
 function App() {
   return (
     <div className="App">
@@ -39,6 +41,9 @@ function App() {
           <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
           <Route path="/project_detail/:id" element={<ProjectDetail />} />
           <Route path="/admin_dashboard" element={<Admin />} />
+          <Route path="/customer_dashboard" element={<Customer />} />
+          <Route path="/customer_proposals" element={<Proposals />} />
+          <Route path="/customer_projects" element={<Projects />} />
         </Routes>
       </BrowserRouter>
       {/* <ProjectListing /> */}

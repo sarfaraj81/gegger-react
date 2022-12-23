@@ -1,0 +1,238 @@
+@import "../../Utlilities/variables";
+
+.customer {
+    display: flex;
+  
+    .customerContainer {
+        width:100%;
+        margin:1em;
+      .breadcrumb-n-title{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .dashboard-headline{
+            h3{
+                display: block;
+    font-size: 26px;
+    color: #333;
+    font-weight: 500;
+            }
+            p{
+                margin: 0;
+                font-weight: 300;
+                span{
+                    color:$primary-color-purple;
+                }
+            }
+        }
+        .breadcrum-ui-kit{
+            min-width: 20% !important;
+             nav{
+                margin: 0 auto;
+                border-radius: 0.5em;
+                
+                div{
+                    nav{
+                        ol{
+                            
+                            margin-bottom: 0;
+                            padding-top: 0.5em;
+                            padding-bottom: 0.5em;
+                            li{
+                                a{
+                                    color:white;
+                                    text-decoration: none;
+                                }
+                            }
+                        }
+                    }
+                }
+             }
+        }
+      }
+  
+      .widgets,
+      .charts {
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+      }
+  
+      .charts {
+        padding: 5px 20px;
+      }
+  
+      .listContainer {
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        margin: 20px;
+  
+        .listTitle {
+          font-weight: 500;
+          color: gray;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+  
+
+  .project-lisitng{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    padding-bottom: 1em;
+    padding-top: 1em;
+     p{
+        margin: 0;
+        
+     }
+     svg{
+        margin: 0 0.5em;
+        color:$primary-color-purple;
+     }
+  }
+  .project-listing-container{
+    background-color: white;
+   
+    box-shadow: 0px 0px 33px 0px rgba(0,0,0,0.1);
+  }
+
+  .project-dashboard-card{
+    border-top: 1px solid rgba(216, 212, 212, 0.718);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    .project-title-dashboard{
+        font-size: 1.6em;
+        margin:0;
+        font-weight: 200;
+    }
+    .status-button-div{
+        button{
+            border:none;
+            color: #449625;
+            background-color: #E0F5D7;
+            border-radius: 0.3em;
+            padding:0.5em;
+            font-weight: 400;
+            min-width: 10vh;
+        }
+    }
+    .date-div{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        p{
+            margin: 0;
+            font-weight: 400;
+            color:#777777;
+        }
+        svg{
+            margin: 0 0.5em;
+            color:#777777;
+        }
+    }
+  }
+
+  .button-group-dashboard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    button{
+        margin: 0.5em 0.2em;
+        border:none;
+        border-radius: 0.3em;
+        min-height: 4vh;
+        min-width: 5vh;
+        span{
+            svg{
+                color:#777777;
+            }
+        }
+    }
+    .purple-button{
+        color: white;
+        background-color: $primary-color-purple;
+        border:none;
+        font-weight: 200;
+        padding: 0.5em;
+        border-radius: 0.3em;
+        span{
+            margin: auto 0.5em;
+            svg{
+                color:white;
+            }
+        }
+        .count-span{
+            height: 6vh;
+            width:6vh;
+            background-color: #5310F3;
+            border-radius: 6em;
+            font-size: 0.9em;
+            
+        }
+
+    }
+  }
+
+
+  .proposal-card-title{
+    p{
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: 400;
+
+    }
+  }
+  .icon-with-p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color:#777777;
+    p{
+        margin:0;
+    }
+    svg{
+        margin: 1em 0.5em;
+    }
+  }
+
+  .button-group-proposal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    button{
+        margin: 0.8em 0.2em;
+        border:none;
+        border-radius: 0.3em;
+        min-height: 4vh;
+        min-width: 5vh;
+        font-size: 0.9em;
+        padding:0.5em 1em;
+        span{
+            margin: auto 0.5em;
+            svg{
+                color:#777777;
+                
+            }
+        }
+    }
+    .view-profile{
+        background-color: $primary-color-purple;
+        color:white;
+        svg{
+            color:white;
+        }
+    }
+    .send-message{
+        background-color: black;
+        color:white;
+        svg{
+            color:white;
+        }
+    }
+  }
