@@ -5,6 +5,7 @@ import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+import Rating from "../../../Components/rating/Rating";
 
 function ServiceCard({
   name,
@@ -15,6 +16,8 @@ function ServiceCard({
   successRate,
   verified,
   id,
+  subtitle,
+  serviceCharge,
 }) {
   return (
     <>
@@ -47,19 +50,20 @@ function ServiceCard({
 
                 {/* title / subtitle div */}
                 <div className="title-desc-card">
-                  <p>{name}</p>
                   <p>{title}</p>
+                  <p>{subtitle}</p>
                   {/* rating div */}
                   <div className="rating-div">
-                    <span>5.0</span>
+                    <span>3.5</span>
                     <div>
-                      <span>
+                      <Rating rating={3.5} maxRating={5} />
+                      {/* <span>
                         {<BsFillStarFill />}
                         {<BsFillStarFill />}
                         {<BsFillStarFill />}
                         {<BsFillStarFill />}
                         {<BsFillStarFill />}
-                      </span>
+                      </span> */}
                     </div>
                   </div>
                 </div>
@@ -72,7 +76,7 @@ function ServiceCard({
                       <p className="bold-p-for-card">Location</p>
                     </Col>
                     <Col md={4}>
-                      <p className="bold-p-for-card">Rate</p>
+                      <p className="bold-p-for-card">Service Charge</p>
                     </Col>
                     <Col md={4}>
                       <p className="bold-p-for-card">Job Success</p>
@@ -83,7 +87,7 @@ function ServiceCard({
                       <p className="black-bold-p-for-card">{location}</p>
                     </Col>
                     <Col md={4}>
-                      <p className="black-bold-p-for-card">${rate}/hr</p>
+                      <p className="black-bold-p-for-card">{serviceCharge}</p>
                     </Col>
                     <Col md={4}>
                       <p className="black-bold-p-for-card">{successRate}%</p>

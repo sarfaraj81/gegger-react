@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { BsBell } from "react-icons/bs";
 import { BsChatLeftText } from "react-icons/bs";
 import { MDBContainer } from "mdb-react-ui-kit";
 import GeegrLogo from "../../assets/images/geegrLogo.png";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { signout } from "../../redux/actions/UserActions";
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Navbar
@@ -92,6 +98,15 @@ function Header() {
                   <span className="status-icon"></span>
                 </MDBContainer>
               </Nav.Link>
+
+              <Nav.Link
+                onClick={() => {
+                  dispatch(signout());
+                }}
+              >
+                logout
+              </Nav.Link>
+
               {/* avatar ends */}
             </Nav>
           </Navbar.Collapse>

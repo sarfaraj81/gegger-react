@@ -11,6 +11,7 @@ import { BsFillClockFill } from "react-icons/bs";
 import GermanyFlag from "../../../assets/images/germany.png";
 import { useParams } from "react-router-dom";
 import Wrapper from "../../../Utlilities/Wrapper";
+import Rating from "../../../Components/rating/Rating";
 function ProjectDetail() {
   const [project, setProject] = useState();
   const { id } = useParams();
@@ -74,17 +75,18 @@ function ProjectDetail() {
                         <p>Acodia</p>
                       </div>
                       <span>{project?.data?.total_rating}.0</span>
-                      <div>
-                        <span>
-                          {ratingLoop.map((item) => {
+                      <div className="rating-stars">
+                        {/* {ratingLoop.map((item) => {
                             return <BsFillStarFill />;
-                          })}
-                          {/* {<BsFillStarFill />}
+                          })} */}
+
+                        <Rating rating={3.5} maxRating={5} />
+
+                        {/* {<BsFillStarFill />}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />}
                           {<BsFillStarFill />} */}
-                        </span>
                       </div>
                       <div className="country-flag-div">
                         <img src={GermanyFlag} alt="flag_icon" />

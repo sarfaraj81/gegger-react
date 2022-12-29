@@ -12,12 +12,36 @@ import { BsPeopleFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import ProjectCard from "./ProjectCard";
+import axios from "axios";
+import { useSelector } from "react-redux";
 function ProjectListing() {
   const btnColor1 = "green";
   const btnColor2 = "yellow";
   const btnColor3 = "red";
   const [status, setStatus] = useState("pending approval");
   const [count, setCount] = useState(4);
+
+  const getState = useSelector((state) => state);
+  // console.log(getState, "at proejct lsiitng");
+
+  //post request
+  const sendingToken = (jwt) => {
+    axios
+      .post(
+        process.env.REACT_APP_URL + "/customer/proposal/",
+        {
+          key: "value",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      )
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
       <Col xs={12} md={12}>

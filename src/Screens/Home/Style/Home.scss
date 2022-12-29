@@ -252,14 +252,15 @@
     align-items: center;
     margin: 0.5em auto;
     span{
-        margin: auto 0.2em;
+        margin: auto 0.1em;
         background-color: $yellow-color-geegr;
         color:white;
-        padding: 0.2em 0.5em;
+        padding: 0.2em 0.25em;
         border-radius: 0.2em;
 
     }
     div{
+        margin: 0 0.35em;
         span{
             color: $yellow-color-geegr;
             background-color: transparent;

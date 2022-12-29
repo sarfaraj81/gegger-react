@@ -1,3 +1,4 @@
+import React, { Component, Suspense } from "react";
 //Header
 import Header from "./Components/Header/Header";
 //Styling
@@ -15,36 +16,45 @@ import Home from "./Screens/Home/Home";
 import ProjectList from "./Screens/Project/List/ProjectList";
 import ServiceDetial from "./Screens/Service/details/ServiceDetail";
 import ProjectDetail from "./Screens/Project/details/ProjectDetail";
-import Admin from "./Dashboard/Admin/Admin";
+import Admin from "./Screens/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
 import ServiceList from "./Screens/Service/List/ServiceList";
 import Customer from "./Screens/Customer/Customer";
 import Proposals from "./Screens/Customer/Proposals/Proposals";
 import Projects from "./Screens/Customer/Projects/Projects";
+import ProtectedRoutes from "./protected.routes";
+const loading = (
+  <div className="pt-3 text-center">
+    <div className="sk-spinner sk-spinner-pulse"></div>
+  </div>
+);
 function App() {
   return (
     <div className="App">
       <Header />
 
       <BrowserRouter>
-        {/* protected  */}
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Home />
+        <Suspense fallback={loading}>
+          {/* protected routes */}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/" name="dasboard" element={<ProtectedRoutes />}>
+              <Route exact path="/admin_dashboard" element={<Admin />} />
+              <Route exact path="/customer_dashboard" element={<Customer />} />
+              <Route exact path="/customer_proposals" element={<Proposals />} />
+              <Route exact path="/customer_projects" element={<Projects />} />
+            </Route>
+            {/* <Home />
           <ServiceList /> */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/services" element={<ServiceList />} />
-          <Route path="/projects" element={<ProjectList />} />
-          <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
-          <Route path="/project_detail/:id" element={<ProjectDetail />} />
-          <Route path="/admin_dashboard" element={<Admin />} />
-          <Route path="/customer_dashboard" element={<Customer />} />
-          <Route path="/customer_proposals" element={<Proposals />} />
-          <Route path="/customer_projects" element={<Projects />} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/services" element={<ServiceList />} />
+            <Route path="/projects" element={<ProjectList />} />
+            <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
+            <Route path="/project_detail/:id" element={<ProjectDetail />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
       {/* <ProjectListing /> */}
       <Footer />

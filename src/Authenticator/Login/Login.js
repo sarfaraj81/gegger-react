@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
 import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
@@ -26,29 +26,26 @@ const schema = Yup.object().shape({
 
 function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //states
   // const [user, setUser] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-  const [isLoggedin, setIsLoggedIn] = useState(false);
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [token, setToken] = useState("");
+  // const [isLoggedin, setIsLoggedIn] = useState(false);
 
-  const getState = useSelector((state) => state)
-  console.log(getState);
+  const getState = useSelector((state) => state);
+  console.log(getState, "at login (state value)");
 
-
-  const {userSignin: userInfo} = useSelector((state) => state);
-  
-  console.log(userInfo);
+  const { userSignin: userInfo } = useSelector((state) => state);
 
   useEffect(() => {
     if (userInfo.isLoggedIn) {
-      navigate('/admin_dashboard')
+      console.log(userInfo, "inside if at login");
+      navigate("/customer_dashboard");
     }
-  })
-
+  });
 
   return (
     <Container fluid className="login-container">
@@ -59,9 +56,7 @@ function Login() {
             validationSchema={schema}
             initialValues={{ email: "", password: "" }}
             onSubmit={async (values) => {
-               dispatch(
-                signin(values)
-                )
+              dispatch(signin(values));
             }}
           >
             {({

@@ -76,7 +76,8 @@ const data = [
   },
 ];
 
-function CategoryList() {
+function CategoryList({ homeData }) {
+  console.log(homeData);
   return (
     <>
       <Container>
@@ -90,13 +91,13 @@ function CategoryList() {
           <Col md={3} xs={0}></Col>
         </Row>
         <Row className="my-5">
-          {data?.map((d) => (
+          {homeData?.map((d) => (
             <Col md={3} sm={3} xs={4} id={d.key}>
               <div className="service-grid-home">
                 {/* <img src={FcSupport} alt="service-icon" /> */}
                 {/* <span>{<FcEngineering />}</span> */}
                 <span>
-                  <img src={icon1} alt="icon"></img>
+                  <img src={d.display_image} alt="icon"></img>
                 </span>
                 <p className="title-of-service-home">{d.title}</p>
                 <p className="description-of-service-home">{d.description}</p>

@@ -11,6 +11,7 @@ import { BsCalendarEvent } from "react-icons/bs";
 import GermanyFlag from "../../../assets/images/germany.png";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Rating from "../../../Components/rating/Rating";
 //modal imports
 import {
   MDBBtn,
@@ -94,27 +95,17 @@ function ServiceDetial() {
                 <Col md={9} xs={9}>
                   {/* title / subtitle div */}
                   <div className="title-desc-card2">
-                    <p>Tom Smith</p>
                     <p>{service?.data?.title}</p>
+                    <p>{service?.data?.category?.title}</p>
                     {/* rating div */}
                     <div className="rating-div2">
                       <span>{service?.data?.rating}.0</span>
                       <div>
-                        <span>
-                          <>
-                            {ratingLoop.map((item) => {
-                              return <BsFillStarFill />;
-                            })}
-                          </>
-                          {/* {}
-                          {<BsFillStarFill />}
-                          {<BsFillStarFill />}
-                          {<BsFillStarFill />} */}
-                        </span>
+                        <Rating rating={service?.data?.rating} maxRating={5} />
                       </div>
                       <div className="country-flag-div">
                         <img src={GermanyFlag} alt="flag_icon" />
-                        <p>Germany</p>
+                        <p>{service?.data?.location}</p>
                       </div>
                       {service?.data?.verified ? (
                         <div className="verification-btn-div">
@@ -353,9 +344,9 @@ function ServiceDetial() {
             <div className="work-detials-div">
               <div className="rate-n-basic-details">
                 <div className="flex-column">
-                  <span>$35</span>
+                  <span>${service?.data?.service_charge}</span>
                   <span>
-                    <p>Hourly Rate</p>
+                    <p>Service Charge</p>
                   </span>
                 </div>
                 <div className="flex-column">

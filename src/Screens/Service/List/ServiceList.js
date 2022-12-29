@@ -46,8 +46,8 @@ function ServiceList() {
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
                     <p>Location</p>
-                    <div class="search">
-                      <i class="fa fa-location"></i>
+                    <div className="search">
+                      <i className="fa fa-location"></i>
                       <input
                         type="text"
                         className="form-control z-depth-1"
@@ -84,8 +84,8 @@ function ServiceList() {
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
                     <p>Keywords</p>
-                    <div class="add">
-                      <i class="fa fa-search"></i>
+                    <div className="add">
+                      <i className="fa fa-search"></i>
                       <input
                         type="text"
                         className="form-control z-depth-1"
@@ -175,14 +175,18 @@ function ServiceList() {
               <Row>
                 {services?.data?.map((service) => (
                   <ServiceCard
+                    key={service.key}
                     name={name}
                     title={service.title}
                     rating={rating}
                     vertified={service.vertified}
-                    location={location}
+                    location={service.location}
                     rate={rate}
                     successRate={successRate}
                     id={service._id}
+                    subtitle={service.category.title}
+                    serviceCharge={service.service_charge}
+                    displayImage={service.display_image}
                   />
                 ))}
 
