@@ -12,6 +12,14 @@ import { useNavigate } from "react-router-dom";
 function Header() {
   const dispatch = useDispatch();
 
+  const { userSignin: userInfo } = useSelector((state) => state);
+  console.log(userInfo, "at header (REDUX)");
+  const [loggedIn, setLoggedIn] = useState(false);
+  // useEffect(() => {
+  //   if (userInfo.isLoggedIn) {
+  //     setLoggedIn(true);
+  //   }
+  // }, [userInfo]);
   return (
     <>
       <Navbar
@@ -85,27 +93,36 @@ function Header() {
                 </Nav.Link>
               </div>
               {/* avatar */}
-              <Nav.Link eventKey={2} href="#memes">
-                <MDBContainer
-                  className="d-flex justify-content-center"
-                  style={{ height: "6vh", position: "relative" }}
-                >
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                    className="rounded-circle"
-                    alt="Avatar"
-                  />
-                  <span className="status-icon"></span>
-                </MDBContainer>
-              </Nav.Link>
-
-              <Nav.Link
-                onClick={() => {
-                  dispatch(signout());
-                }}
-              >
-                logout
-              </Nav.Link>
+              {userInfo?.isLoggedIn ? (
+                <>
+                  <Nav.Link
+                    onClick={() => {
+                      dispatch(signout());
+                    }}
+                  >
+                    logout
+                  </Nav.Link>
+                  <Nav.Link eventKey={2} href="#memes">
+                    <MDBContainer
+                      className="d-flex justify-content-center"
+                      style={{ height: "6vh", position: "relative" }}
+                    >
+                      <img
+                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                        className="rounded-circle"
+                        alt="Avatar"
+                      />
+                      <span className="status-icon"></span>
+                    </MDBContainer>
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Nav.Link href="/login">Login</Nav.Link>
+                  {<>/</>}
+                  <Nav.Link href="/signup">Sign up</Nav.Link>
+                </>
+              )}
 
               {/* avatar ends */}
             </Nav>

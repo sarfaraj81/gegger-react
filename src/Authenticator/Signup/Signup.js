@@ -5,6 +5,8 @@ import axios from "axios";
 //formik import
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useNavigate } from "react-router-dom";
+
 // Creating schema
 
 function Signup() {
@@ -16,8 +18,9 @@ function Signup() {
       console.error(error);
     }
   }
+  const navigate = useNavigate();
   return (
-    <Container fluid className="login-container">
+    <Container fluid className="login-container mt-5">
       <Row>
         <Col md={12} xs={12}>
           {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
@@ -64,6 +67,9 @@ function Signup() {
                 data
               );
               console.log(responseData);
+              if (data !== null) {
+                navigate("/login");
+              }
             }}
           >
             {({
