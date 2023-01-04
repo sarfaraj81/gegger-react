@@ -13,17 +13,32 @@ import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 
 import ProjectCard from "../components/ProjectCard";
-import useFetch from "../../../Components/Hooks/useFetch";
+// import useFetch from "../../../Hooks/useFetch";
 import Wrapper from "../../../Utlilities/Wrapper";
 function ProjectList() {
   //csutom - fetch hook
-  const {
-    error,
-    isPending,
-    data: projects,
-  } = useFetch(process.env.REACT_APP_URL + "/front/projects");
-  console.log(projects);
-
+  // const {
+  //   error,
+  //   isPending,
+  //   data: projects,
+  // } = useFetch(process.env.REACT_APP_URL + "/front/projects");
+  // console.log(projects);
+  const [projects, setProjects] = useState();
+  (async () => {
+    const rawResponse = await fetch(
+      process.env.REACT_APP_URL + "/front/projects",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ b: "Textual content" }),
+      }
+    );
+    const data = await rawResponse.json();
+    setProjects(data);
+  })();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLcoation] = useState("");

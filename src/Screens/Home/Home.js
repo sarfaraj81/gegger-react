@@ -1,7 +1,7 @@
 import React from "react";
 import CategoryList from "./components/CategoryList";
 import HeroSection from "./components/HeroSection";
-import useFetch from "../../Components/Hooks/useFetch";
+import useFetch from "../../Hooks/useFetch";
 function Home() {
   //csutom - fetch hook
   const { error, isPending, data } = useFetch(

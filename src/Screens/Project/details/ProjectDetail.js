@@ -80,7 +80,10 @@ function ProjectDetail() {
                             return <BsFillStarFill />;
                           })} */}
 
-                        <Rating rating={3.5} maxRating={5} />
+                        <Rating
+                          rating={project?.data?.total_rating}
+                          maxRating={5}
+                        />
 
                         {/* {<BsFillStarFill />}
                           {<BsFillStarFill />}

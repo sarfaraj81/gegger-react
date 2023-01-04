@@ -12,10 +12,11 @@ import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
 import ServiceCard from "../components/ServiceCard";
-import useFetch from "../../../Components/Hooks/useFetch";
+// import useFetch from "../../../Hooks/useFetch";
 import { Verified } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import Wrapper from "../../../Utlilities/Wrapper";
+import useFetchAndPost from "../../../Hooks/useFetchAndPost";
 function ServiceList() {
   //states
   const [name, setName] = useState("Tom Cruise");
@@ -27,13 +28,37 @@ function ServiceList() {
   const [vertified, setVerified] = useState(true);
   const [picture, setPicture] = useState("");
   const wrapperHeight = "14vh";
+  const body = "";
   //csutom - fetch hook
-  const {
-    error,
-    isPending,
-    data: services,
-  } = useFetch(process.env.REACT_APP_URL + "/front/services");
-
+  // const {
+  //   error,
+  //   isPending,
+  //   data: services,
+  // } = useFetch(process.env.REACT_APP_URL + "/front/services");
+  // const {
+  //   data: services,
+  //   error,
+  //   loading,
+  //   postData,
+  // } = useFetchAndPost(process.env.REACT_APP_URL + "/front/services");
+  // postData(body);
+  const [service, setService] = useState();
+  (async () => {
+    const rawResponse = await fetch(
+      process.env.REACT_APP_URL + "/front/services",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ b: "Textual content" }),
+      }
+    );
+    const data = await rawResponse.json();
+    setService(data);
+  })();
+  console.log(service, "post data for service listing");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -173,7 +198,7 @@ function ServiceList() {
                 </Col>
               </Row>
               <Row>
-                {services?.data?.map((service) => (
+                {service?.data?.map((service) => (
                   <ServiceCard
                     key={service.key}
                     name={name}
