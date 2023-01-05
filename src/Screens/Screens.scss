@@ -231,7 +231,7 @@ $progress-bar-bg:  #6A2FF9;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    margin: 1.5em auto 1em auto;
+    margin: 1.5em auto 1em 0.5em;
     width: 70%;
     div{
         display: flex;
@@ -305,7 +305,8 @@ $progress-bar-bg:  #6A2FF9;
 }
 .custom-gray-row{
     // border-top: 1px solid #bdc0c354;
-    background-color: #F4F4F4;
+    // background-color: #F4F4F4;
+    background-color: #dddddd;
 }
 //over riding _utility
 

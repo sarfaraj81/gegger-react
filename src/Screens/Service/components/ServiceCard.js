@@ -29,7 +29,7 @@ function ServiceCard({
                 <Nav.Link eventKey={2} href="#memes">
                   <MDBContainer
                     className="d-flex justify-content-center"
-                    style={{ height: "6vh", position: "relative" }}
+                    style={{ height: "9vh", position: "relative" }}
                   >
                     <img
                       src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"

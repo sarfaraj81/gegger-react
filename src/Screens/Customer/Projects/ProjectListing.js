@@ -23,25 +23,58 @@ function ProjectListing() {
 
   const getState = useSelector((state) => state);
   // console.log(getState, "at proejct lsiitng");
-
-  //post request
-  const sendingToken = (jwt) => {
-    axios
-      .post(
-        process.env.REACT_APP_URL + "/customer/proposal/",
-        {
-          key: "value",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      )
-      .then((response) => console.log(response.data))
-      .catch((error) => console.error(error));
+  const data = {
+    title: "testing add api satyam",
+    description: "I need expert",
+    budget: 150,
+    category: "63b2a33561da98130a41eeb9",
+    sub_category: "63b2a33561da98130a41eeb9",
+    location: "san diego",
+    lat: "5.0000",
+    long: "70.000",
   };
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "Origin, X-Requested-With, Content-Type, Accept",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Allow-Credentials": "true",
+      Accept: "application/json",
+      "Content-Type": "application/json",
 
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYjJhMmVmNjFkYTk4MTMwYTQxZWViNiIsImZpcnN0X25hbWUiOiJjdXN0b21lcm5ldyIsImVtYWlsIjoiY3VzdG9tZXJuZXdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkM2pHSm93U1NZSUFwMHFDQUNyN1pZT0l1bFlKMFFrSjYvb05GY0FScVZjUXg0a29WRVJkYi4iLCJ0eXBlIjoidXNlciIsImZjbV90b2tlbiI6W10sImRlbGV0ZWQiOmZhbHNlLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMy0wMS0wMlQwOToyNTowMy42NjNaIiwiX192IjowfSwiaWF0IjoxNjcyODI1NjI1fQ._unC0kHynMwoYqSD_On2PZFRPPGQbYBfcvr6jzG_Lt0",
+    },
+  };
+  //post request
+  // const sendingToken = () => {
+  //   axios
+  // .post(process.env.REACT_APP_URL + "/customer/proposal/", {
+  //   headers: {
+  //     "Access-Control-Allow-Origin": "*",
+  //     "Access-Control-Allow-Headers":
+  //       "Origin, X-Requested-With, Content-Type, Accept",
+  //     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+  //     token:
+  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYjJhMmVmNjFkYTk4MTMwYTQxZWViNiIsImZpcnN0X25hbWUiOiJjdXN0b21lcm5ldyIsImVtYWlsIjoiY3VzdG9tZXJuZXdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkM2pHSm93U1NZSUFwMHFDQUNyN1pZT0l1bFlKMFFrSjYvb05GY0FScVZjUXg0a29WRVJkYi4iLCJ0eXBlIjoidXNlciIsImZjbV90b2tlbiI6W10sImRlbGV0ZWQiOmZhbHNlLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMy0wMS0wMlQwOToyNTowMy42NjNaIiwiX192IjowfSwiaWF0IjoxNjcyODI1NjI1fQ._unC0kHynMwoYqSD_On2PZFRPPGQbYBfcvr6jzG_Lt0",
+  //   },
+  //   body: {
+  //     data: data,
+  //   },
+  // })
+  // .then((response) => console.log(response.data))
+  // .catch((error) => console.error(error));
+  const testing = () => {
+    fetch(process.env.REACT_APP_URL + "/customer/proposal/", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+  // };
+  testing();
   return (
     <>
       <Col xs={12} md={12}>

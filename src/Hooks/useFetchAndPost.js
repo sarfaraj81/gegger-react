@@ -16,7 +16,7 @@ function useFetchAndPost(url) {
       setLoading(false);
     } catch (error) {
       if (error.name === "AbortError") {
-        console.log("Fetch cancelled");
+        // console.log("Fetch cancelled");
       } else {
         setError(error);
       }
@@ -39,7 +39,7 @@ function useFetchAndPost(url) {
       setLoading(false);
     } catch (error) {
       if (error.name === "AbortError") {
-        console.log("Fetch cancelled");
+        // console.log("Fetch cancelled");
       } else {
         setError(error);
       }
@@ -49,8 +49,9 @@ function useFetchAndPost(url) {
 
   useEffect(() => {
     fetchData();
+
     return () => controller.abort();
-  }, [url]);
+  }, [controller]);
 
   return { data, error, loading, postData };
 }

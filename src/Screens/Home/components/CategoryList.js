@@ -77,7 +77,7 @@ const data = [
 ];
 
 function CategoryList({ homeData }) {
-  console.log(homeData);
+  // console.log(homeData);
   return (
     <>
       <Container>
@@ -100,7 +100,7 @@ function CategoryList({ homeData }) {
                   <img src={d.display_image} alt="icon"></img>
                 </span>
                 <p className="title-of-service-home">{d.title}</p>
-                <p className="description-of-service-home">{d.description}</p>
+                {/* <p className="description-of-service-home">{d.description}</p> */}
               </div>
             </Col>
           ))}

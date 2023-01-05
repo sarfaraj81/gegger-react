@@ -99,7 +99,7 @@ function CategoryList() {
                   <img src={icon1} alt="icon"></img>
                 </span>
                 <p className="title-of-service-home">{d.title}</p>
-                <p className="description-of-service-home">{d.description}</p>
+                {/* <p className="description-of-service-home">{d.description}</p> */}
               </div>
             </Col>
           ))}

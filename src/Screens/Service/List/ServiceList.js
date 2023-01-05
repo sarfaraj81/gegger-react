@@ -42,23 +42,34 @@ function ServiceList() {
   //   postData,
   // } = useFetchAndPost(process.env.REACT_APP_URL + "/front/services");
   // postData(body);
-  const [service, setService] = useState();
-  (async () => {
-    const rawResponse = await fetch(
-      process.env.REACT_APP_URL + "/front/services",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ b: "Textual content" }),
-      }
-    );
-    const data = await rawResponse.json();
-    setService(data);
-  })();
-  console.log(service, "post data for service listing");
+  // const [service, setService] = useState();
+  // (async () => {
+  //   const rawResponse = await fetch(
+  //     process.env.REACT_APP_URL + "/front/services",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ b: "Textual content" }),
+  //     }
+  //   );
+  //   const data = await rawResponse.json();
+  //   setService(data);
+  // })();
+
+  // setService(data);
+  // console.log(service, "post data for service listing");
+
+  const {
+    error,
+    data: service,
+    loading,
+    postData,
+  } = useFetchAndPost(process.env.REACT_APP_URL + "/front/services");
+  postData();
+  // console.log(error, "error & loading");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
