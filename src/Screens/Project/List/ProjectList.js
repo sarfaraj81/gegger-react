@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
@@ -11,7 +11,7 @@ import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
 import { BsStar } from "react-icons/bs";
 import { BsCheckCircleFill } from "react-icons/bs";
-
+import useFetchPost from "../../../Hooks/useFetchPost";
 import ProjectCard from "../components/ProjectCard";
 // import useFetch from "../../../Hooks/useFetch";
 import Wrapper from "../../../Utlilities/Wrapper";
@@ -23,22 +23,22 @@ function ProjectList() {
   //   data: projects,
   // } = useFetch(process.env.REACT_APP_URL + "/front/projects");
   // console.log(projects);
-  const [projects, setProjects] = useState();
-  (async () => {
-    const rawResponse = await fetch(
-      process.env.REACT_APP_URL + "/front/projects",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ b: "Textual content" }),
-      }
-    );
-    const data = await rawResponse.json();
-    setProjects(data);
-  })();
+  // const [projects, setProjects] = useState();
+  // (async () => {
+  //   const rawResponse = await fetch(
+  //     process.env.REACT_APP_URL + "/front/projects",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ b: "Textual content" }),
+  //     }
+  //   );
+  //   const data = await rawResponse.json();
+  //   setProjects(data);
+  // })();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLcoation] = useState("");
@@ -48,6 +48,18 @@ function ProjectList() {
   const [id, setId] = useState("");
   const [data, setData] = useState();
   const wrapperHeight = "14vh";
+
+  //csutom - fetch hook
+  const {
+    response,
+    error,
+    isLoading,
+    fetchByPost,
+    data: projects,
+  } = useFetchPost(process.env.REACT_APP_URL + "/front/projects");
+  useEffect(() => {
+    fetchByPost();
+  }, []);
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />

@@ -4,7 +4,11 @@ function HeroSection() {
   return (
     <>
       {/* content row */}
-      <Container fluid className="hero-section-container">
+      <Container
+        fluid
+        className="hero-section-container"
+        style={{ borderBottom: "0.5px solid lightgrey" }}
+      >
         <Row>
           <Col md={10} sm={12} xs={12}>
             <div className="content-div-hero mx-4">
@@ -21,7 +25,7 @@ function HeroSection() {
 
         {/* search bar row */}
         <Row className="search-bar-row mx-3">
-          <Col md={4} className="custom-search-bar-p-right-0">
+          {/* <Col md={4} className="custom-search-bar-p-right-0">
             <div class="search">
               <i class="fa fa-location"></i>
               <input
@@ -30,7 +34,7 @@ function HeroSection() {
                 placeholder="Location"
               />
             </div>
-          </Col>
+          </Col> */}
           <Col md={8} className="custom-search-bar-p-left-0">
             <div class="search">
               <i class="fa fa-search"></i>
@@ -47,19 +51,19 @@ function HeroSection() {
         </Row>
         {/* additional information row */}
         <Row className="mx-3">
-          <Col md={2} className="border-right">
+          <Col md={2} xs={3} className="border-right">
             <div className="extra-information-hero">
               <p>1,586</p>
               <p>Jobs Posted</p>
             </div>
           </Col>
-          <Col md={2} className="border-right">
+          <Col md={2} xs={3} className="border-right">
             <div className="extra-information-hero2">
               <p>3,456</p>
               <p>Tasks Posted</p>
             </div>
           </Col>
-          <Col md={2}>
+          <Col md={2} xs={3}>
             <div className="extra-information-hero2">
               <p>1,286</p>
               <p>Vendors</p>

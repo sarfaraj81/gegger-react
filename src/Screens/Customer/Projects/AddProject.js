@@ -13,12 +13,12 @@ function AddProject() {
   const [project, setProject] = useState("");
   const wrapperHeight = "11vh";
   const params = {
-    title: "testing add api satyam",
+    title: "testing...",
     description: "I need expert",
     budget: 150,
     category: "63b2a33561da98130a41eeb9",
     sub_category: "63b2a33561da98130a41eeb9",
-    location: "san diego",
+    location: "New York",
     lat: "5.0000",
     long: "70.000",
   };
