@@ -7,10 +7,13 @@ import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function ProjectCard({ status, count }) {
+function ProjectCard({ status, count, title, data, category_id }) {
   let btnColor = "";
   let textColor = "";
   if (status === "pending approval") {
+    btnColor = "#E0F5D7";
+    textColor = "#449625";
+  } else if (status === "active") {
     btnColor = "#E0F5D7";
     textColor = "#449625";
   } else if (status === "expiring") {
@@ -28,7 +31,7 @@ function ProjectCard({ status, count }) {
       <Container fluid>
         <Row className="my-2">
           <Col xs={3} md={3}>
-            <p className="project-title-dashboard">Carpenter</p>
+            <p className="project-title-dashboard">{title}</p>
           </Col>
           <Col xs={3} md={3}>
             <div className="status-button-div">
@@ -55,7 +58,7 @@ function ProjectCard({ status, count }) {
         <Row className="mt-3">
           <Col md={12} xs={12}>
             <div className="button-group-dashboard">
-              <Link to="/customer_proposals">
+              <Link to={`/customer_proposals/${category_id}`}>
                 <button className="purple-button">
                   <span>
                     <BsPeopleFill />

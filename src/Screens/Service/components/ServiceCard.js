@@ -54,9 +54,9 @@ function ServiceCard({
                   <p>{subtitle}</p>
                   {/* rating div */}
                   <div className="rating-div">
-                    <span>3.5</span>
+                    <span className="rating-count">{rating}</span>
                     <div>
-                      <Rating rating={3.5} maxRating={5} />
+                      <Rating rating={rating} maxRating={5} />
                       {/* <span>
                         {<BsFillStarFill />}
                         {<BsFillStarFill />}

@@ -6,61 +6,51 @@ import useFetchAndPost from "../../../Hooks/useFetchAndPost";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
+import useFetchPost from "../../../Hooks/useFetchPost";
+import usePost from "../../../Hooks/usePost";
 import axios from "axios";
 function AddProject() {
   const [token, setToken] = useState({ token: "" });
   const { userSignin: userInfo } = useSelector((state) => state);
   const [project, setProject] = useState("");
   const wrapperHeight = "11vh";
-  const params = {
-    title: "testing...",
-    description: "I need expert",
-    budget: 150,
-    category: "63b2a33561da98130a41eeb9",
-    sub_category: "63b2a33561da98130a41eeb9",
-    location: "New York",
-    lat: "5.0000",
-    long: "70.000",
-  };
+  const getState = useSelector((state) => state);
+  const [dataState, setDataState] = useState();
 
   var requestOptions = {
     method: "POST",
-    body: JSON.stringify(params),
+    body: JSON.stringify(dataState),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers":
         "Origin, X-Requested-With, Content-Type, Accept",
       "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-      "Access-Control-Allow-Credentials": "true",
-      Accept: "application/json",
+
       "Content-Type": "application/json",
 
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYjJhMmVmNjFkYTk4MTMwYTQxZWViNiIsImZpcnN0X25hbWUiOiJjdXN0b21lcm5ldyIsImVtYWlsIjoiY3VzdG9tZXJuZXdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkM2pHSm93U1NZSUFwMHFDQUNyN1pZT0l1bFlKMFFrSjYvb05GY0FScVZjUXg0a29WRVJkYi4iLCJ0eXBlIjoidXNlciIsImZjbV90b2tlbiI6W10sImRlbGV0ZWQiOmZhbHNlLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMy0wMS0wMlQwOToyNTowMy42NjNaIiwiX192IjowfSwiaWF0IjoxNjcyODI1NjI1fQ._unC0kHynMwoYqSD_On2PZFRPPGQbYBfcvr6jzG_Lt0",
+      token: getState?.userSignin?.userInfo?.data?.token,
     },
   };
 
-  const testing = () => {
-    fetch(process.env.REACT_APP_URL + "/customer/project/add", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  };
-  console.log("params", params);
-  console.log("headders", requestOptions);
-  //   const jwtToken = userInfo?.userInfo?.data?.token;
+  const { response, error, isLoading, fetchByPost, data } = usePost(
+    process.env.REACT_APP_URL + "/customer/project/add",
+    requestOptions
+  );
   useEffect(() => {
-    setToken(userInfo?.userInfo?.data?.token);
-  }, [userInfo]);
-  // const { data, error, loading, postData } = useFetchAndPost(
-  //   process.env.REACT_APP_URL + "/customer/project/add"
-  // );
-
-  //   console.log(data);
+    fetchByPost();
+  }, [dataState, token]);
+  console.log(getState?.userSignin?.userInfo);
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
       <Container>
+        <Row>
+          <Col xs={12} md={12}>
+            <div className="title-headline">
+              <h3>Add Project</h3>
+            </div>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Formik
@@ -68,93 +58,103 @@ function AddProject() {
                 title: "",
                 description: "",
                 budget: "",
-                category: "",
-                sub_category: "",
+                category: "638b0413a15ec9d0291662ae",
+                sub_category: "638b0413a15ec9d0291662ae",
                 location: "",
-                lat: "",
-                long: "",
-                token: "",
+                lat: "5.0",
+                long: "4.0",
               }}
               onSubmit={(values, { setSubmitting }) => {
                 // Submit the form
-                console.log(values);
-                values.token = token;
-                // axios
-                //   .post(
-                //     process.env.REACT_APP_URL + "/customer/project/add",
-                //     values,
-                //     {
-                //       headers: {
-                //         token: token,
-                //       },
-                //     }
-                //   )
-                //   .then((response) => console.log(response.data))
-                //   .catch((error) => console.error(error));
-                // (async () => {
-                //   const rawResponse = await fetch(
-                //     process.env.REACT_APP_URL + "/customer/project/add",
-                //     {
-                //       method: "POST",
-                //       headers: {
-                //         Accept: "application/json",
-                //         "Content-Type": "application/json",
-                //         token: token,
-                //       },
-                //       body: JSON.stringify({
-                //         title: "Plumber for bathroom tap",
-                //         description: values.description,
-                //         budget: values.budget,
-                //         category: "638b0413a15ec9d0291662ae",
-                //         sub_category: "638b0413a15ec9d0291662ae",
-                //         location: values.location,
-                //         lat: values.lat,
-                //         long: values.long,
-                //       }),
-                //     }
-                //   );
-                //   const data = await rawResponse.json();
-                //   setProject(data);
-                //   console.log(project);
-                // })();
-
+                setDataState(values);
+                if (dataState) {
+                  fetchByPost();
+                }
                 setSubmitting(false);
               }}
             >
               {({ isSubmitting }) => (
-                <Form>
-                  <Field type="text" name="title" placeholder="Title" />
-                  <Field
-                    type="text"
-                    name="description"
-                    placeholder="Description"
-                  />
-                  <Field type="text" name="budget" placeholder="Budget" />
-                  <Field type="text" name="category" placeholder="Category" />
-                  <Field
-                    type="text"
-                    name="sub_category"
-                    placeholder="Sub Category"
-                  />
-                  <Field type="text" name="location" placeholder="Location" />
-                  <Field type="number" name="lat" placeholder="Latitude" />
-                  <Field type="number" name="long" placeholder="Longititude" />
-
-                  <button type="submit" disabled={isSubmitting}>
-                    Submit
-                  </button>
-                </Form>
+                <Container>
+                  <Form className="customer_add_form">
+                    <Row>
+                      <Col md={6} sm={6} lg={6}>
+                        <label>Title:</label>
+                        <Field type="text" name="title" placeholder="Title" />
+                      </Col>
+                      <Col md={6}></Col>
+                      <Col md={12} sm={12} lg={12}>
+                        <label>Description:</label>
+                        <Field
+                          type="textarea"
+                          name="description"
+                          placeholder="Description"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <label>Budget:</label>
+                        <Field type="text" name="budget" placeholder="Budget" />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <label>Category:</label>
+                        <Field
+                          type="text"
+                          name="category"
+                          placeholder="Category"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <label>Sub-category:</label>
+                        <Field
+                          type="text"
+                          name="sub_category"
+                          placeholder="Sub Category"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <label>Location</label>
+                        <Field
+                          type="text"
+                          name="location"
+                          placeholder="Location"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <Field
+                          type="number"
+                          name="lat"
+                          placeholder="Latitude"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <Field
+                          type="number"
+                          name="long"
+                          placeholder="Longititude"
+                        />
+                      </Col>
+                      <Col md={6} sm={6} lg={6}>
+                        <button
+                          className="btn"
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          Submit
+                        </button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Container>
               )}
             </Formik>
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col>
             <button type="submit" onClick={() => testing()}>
               Click
             </button>
           </Col>
-        </Row>
+        </Row> */}
       </Container>
     </>
   );

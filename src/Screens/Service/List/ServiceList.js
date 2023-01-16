@@ -3,7 +3,7 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import { FormControl } from "react-bootstrap";
 import InputGroup from "react-bootstrap/InputGroup";
 import { BsSearch } from "react-icons/bs";
 import Card from "react-bootstrap/Card";
@@ -14,7 +14,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import ServiceCard from "../components/ServiceCard";
 // import useFetch from "../../../Hooks/useFetch";
 import { Verified } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Wrapper from "../../../Utlilities/Wrapper";
 import useFetchAndPost from "../../../Hooks/useFetchAndPost";
 import useFetchPost from "../../../Hooks/useFetchPost";
@@ -28,7 +28,31 @@ function ServiceList() {
   const [successRate, setSuccessrate] = useState(95);
   const [vertified, setVerified] = useState(true);
   const [picture, setPicture] = useState("");
+  const [params, setParams] = useState("");
+  const [changeLocation, setChangeLocation] = useState("");
+  const [range, setRange] = useState();
   const wrapperHeight = "14vh";
+  const { id } = useParams();
+  // console.log(id);
+  const handleChange = (e) => {
+    setParams(e.target.value);
+  };
+  const handleChangeLocation = (e) => {
+    setChangeLocation(e.target.value);
+    // console.log(e.target.value, "location");
+  };
+  const handleRange = (e) => {
+    setRange(e.target.value);
+    // console.log(e.target.value);
+  };
+  var search = {
+    cat_id: id,
+    s: params,
+    location: changeLocation,
+    service_charge: range,
+  };
+  var body = JSON.stringify(search);
+  // console.log(body);
 
   //csutom - fetch hook
   const {
@@ -37,10 +61,10 @@ function ServiceList() {
     isLoading,
     fetchByPost,
     data: services,
-  } = useFetchPost(process.env.REACT_APP_URL + "/front/services");
+  } = useFetchPost(process.env.REACT_APP_URL + "/front/services", body);
   useEffect(() => {
     fetchByPost();
-  }, []);
+  }, [body]);
 
   return (
     <>
@@ -60,6 +84,7 @@ function ServiceList() {
                         type="text"
                         className="form-control z-depth-1"
                         placeholder="Location"
+                        onChange={(e) => handleChangeLocation(e)}
                       />
                     </div>
                   </div>
@@ -89,7 +114,7 @@ function ServiceList() {
                 </Col>
               </Row>
               <Row>
-                <Col md={12} sm={12} xs={12}>
+                {/* <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
                     <p>Keywords</p>
                     <div className="add">
@@ -107,13 +132,18 @@ function ServiceList() {
                       <button>Plumber</button>
                     </div>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <Col md={12} sm={12} xs={12}>
                   <div className="my-3">
-                    <p>Price Range</p>
-                    <Form.Range />
+                    <p>Price Range : {range}$</p>
+                    <Form.Range
+                      min={0}
+                      max={10000}
+                      onChange={(e) => handleRange(e)}
+                    />
+                    {/* <FormControl type="range" min={0} max={100} /> */}
                   </div>
                 </Col>
               </Row>
@@ -151,15 +181,16 @@ function ServiceList() {
                   <div className="search-panel-service">
                     <p>Search List</p>
                     <span>{<BsSearch />}</span>
-                    <span className="sort-by-span">Sort By:</span>
+                    {/* <span className="sort-by-span">Sort By:</span> */}
                     <InputGroup className="mb-3">
                       <Form.Control
                         placeholder="Search by relevance"
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
+                        onChange={(e) => handleChange(e)}
                       />
 
-                      <Dropdown>
+                      {/* <Dropdown>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                           Relevance
                         </Dropdown.Toggle>
@@ -175,7 +206,7 @@ function ServiceList() {
                             Something else
                           </Dropdown.Item>
                         </Dropdown.Menu>
-                      </Dropdown>
+                      </Dropdown> */}
                     </InputGroup>
                   </div>
                 </Col>
@@ -183,10 +214,10 @@ function ServiceList() {
               <Row>
                 {services?.data?.map((service) => (
                   <ServiceCard
-                    key={service.key}
+                    key={service._id}
                     name={name}
                     title={service.title}
-                    rating={rating}
+                    rating={service.rating}
                     vertified={service.vertified}
                     location={service.location}
                     rate={rate}

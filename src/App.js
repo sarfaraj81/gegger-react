@@ -25,6 +25,7 @@ import Proposals from "./Screens/Customer/Proposals/Proposals";
 import Projects from "./Screens/Customer/Projects/Projects";
 import ProtectedRoutes from "./protected.routes";
 import AddProject from "./Screens/Customer/Projects/AddProject";
+import Category from "./Screens/Category/Category";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -44,6 +45,11 @@ function App() {
               <Route exact path="/admin_dashboard" element={<Admin />} />
               <Route exact path="/customer_dashboard" element={<Customer />} />
               <Route exact path="/customer_proposals" element={<Proposals />} />
+              <Route
+                exact
+                path="/customer_proposals/:id"
+                element={<Proposals />}
+              />
               <Route exact path="/customer_projects" element={<Projects />} />
               <Route
                 exact
@@ -51,14 +57,15 @@ function App() {
                 element={<AddProject />}
               />
             </Route>
-            {/* <Home />
-          <ServiceList /> */}
+
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/services" element={<ServiceList />} />
+            <Route path="/services/:id" element={<ServiceList />} />
             <Route path="/projects" element={<ProjectList />} />
             <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
             <Route path="/project_detail/:id" element={<ProjectDetail />} />
+            <Route path="/category" element={<Category />} />
           </Routes>
         </Suspense>
       </BrowserRouter>

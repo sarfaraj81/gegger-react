@@ -17,6 +17,7 @@ import wrench from "../../../assets/images/wrench.png";
 import cleaning from "../../../assets/images/cleaning.png";
 import makeup from "../../../assets/images/makeup.png";
 import icon1 from "../../../assets/images/icon1.png";
+import { Link } from "react-router-dom";
 const data = [
   {
     id: 1,
@@ -93,15 +94,20 @@ function CategoryList({ homeData }) {
         <Row className="my-5">
           {homeData?.map((d) => (
             <Col md={3} sm={3} xs={4} id={d.key}>
-              <div className="service-grid-home">
-                {/* <img src={FcSupport} alt="service-icon" /> */}
-                {/* <span>{<FcEngineering />}</span> */}
-                <span>
-                  <img src={d.display_image} alt="icon"></img>
-                </span>
-                <p className="title-of-service-home">{d.title}</p>
-                {/* <p className="description-of-service-home">{d.description}</p> */}
-              </div>
+              <Link
+                to={`/services/${d?._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <div className="service-grid-home" id={d.key}>
+                  {/* <img src={FcSupport} alt="service-icon" /> */}
+                  {/* <span>{<FcEngineering />}</span> */}
+                  <span>
+                    <img src={d.display_image} alt="icon"></img>
+                  </span>
+                  <p className="title-of-service-home">{d.title}</p>
+                  {/* <p className="description-of-service-home">{d.description}</p> */}
+                </div>
+              </Link>
             </Col>
           ))}
           {/* <Col md={3} sm={3} xs={4}>

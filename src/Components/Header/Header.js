@@ -119,8 +119,8 @@ function Header() {
               ) : (
                 <>
                   <Nav.Link href="/login">Login</Nav.Link>
-                  {<>/</>}
-                  <Nav.Link href="/signup">Sign up</Nav.Link>
+                  {/* {<>/</>}
+                  <Nav.Link href="/signup">Sign up</Nav.Link> */}
                 </>
               )}
 

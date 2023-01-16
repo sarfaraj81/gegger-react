@@ -36,7 +36,7 @@
     .search .fa-location{
 
         position: absolute;
-        top: 18px;
+        top: 40%;
         /* left: 0; */
         right: 25px;
    
@@ -262,6 +262,9 @@
     // justify-content: center;
     align-items: center;
     margin: 0.5em auto;
+    .rating-count{
+        padding: 0.2em 0.5em;
+    }
     span{
         margin: auto 0.1em;
         background-color: $yellow-color-geegr;

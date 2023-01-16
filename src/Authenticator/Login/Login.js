@@ -101,6 +101,10 @@ function Login() {
                     <p className="error">
                       {errors.password && touched.password && errors.password}
                     </p>
+                    <p>
+                      Doesn't have an account? <br />
+                      <Link to="/signup">Register here!</Link>
+                    </p>
                     {/* Click on submit button to submit the form */}
                     <button type="submit">Login</button>
                   </form>

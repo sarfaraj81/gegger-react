@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useFetchPost(url, options) {
+function useFetchPost(url, options, headerData) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,8 @@ function useFetchPost(url, options) {
   const fetchByPost = async () => {
     var requestOptions = {
       method: "POST",
-      body: "",
+      body: options,
+      headers: headerData,
       redirect: "follow",
     };
     fetch(url, requestOptions)

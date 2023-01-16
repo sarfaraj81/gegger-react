@@ -1,6 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Navbar, Nav, Row, Col } from "react-bootstrap";
+
+import useFetchPost from "../../../Hooks/useFetchPost";
 function HeroSection() {
+  const [params, setParams] = useState("");
+  const handleChange = (e) => {
+    setParams(e.target.value);
+  };
+  var search = { s: params };
+  var body = JSON.stringify(search);
+  // console.log(body);
+  // const {
+  //   data: search,
+  //   error: searchError,
+  //   loading,
+  // } = useSearch("http://170.187.251.211:3010/front/category_search", params);
+  // console.log(search, searchError);
+  // var raw = '{"s": "plum"}';
+  // var requestOptions = {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: raw,
+  //   redirect: "follow",
+  // };
+  // fetch("http://170.187.251.211:3010/front/category_search", requestOptions)
+  //   .then((response) => response.json())
+  //   .then((result) => console.log(result))
+  //   .catch((error) => console.log("error", error));
+
+  const {
+    response,
+    error,
+    isLoading,
+    fetchByPost,
+    data: services,
+  } = useFetchPost(process.env.REACT_APP_URL + "/front/services", body);
+  useEffect(() => {
+    fetchByPost();
+  }, [params, body]);
+
+  // console.log(response);
   return (
     <>
       {/* content row */}
@@ -42,6 +81,7 @@ function HeroSection() {
                 type="text"
                 className="form-control z-depth-1"
                 placeholder="How can we help?"
+                onChange={(e) => handleChange(e)}
               />
               <button className="btn btn-primary custom-btn-geegr">
                 Search

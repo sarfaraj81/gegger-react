@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
@@ -25,14 +25,19 @@ import {
   MDBTextArea,
   MDBInput,
 } from "mdb-react-ui-kit";
-
+import Dropdown from "react-bootstrap/Dropdown";
 import Wrapper from "../../../Utlilities/Wrapper";
+import { useSelector } from "react-redux";
+import useFetchPost from "../../../Hooks/useFetchPost";
+import usePost from "../../../Hooks/usePost";
 function ServiceDetial() {
   const [varyingState, setVaryingState] = useState("");
   const [varyingModal, setVaryingModal] = useState(false);
   const [varyingRecipient, setVaryingRecipient] = useState("");
   const [varyingMessage, setVaryingMessage] = useState("");
-  const [service, setService] = useState();
+  // const [service, setService] = useState(null);
+  const getState = useSelector((state) => state);
+
   const onChangeRecipient = (event) => {
     setVaryingRecipient(event.target.value);
   };
@@ -48,29 +53,61 @@ function ServiceDetial() {
   //   isPending,
   //   data: services,
   // } = useFetch("http://localhost:3010/front/service/details");
-  (async () => {
-    const rawResponse = await fetch(
-      process.env.REACT_APP_URL + "/front/service/details",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ service_id: id, b: "Textual content" }),
-      }
-    );
-    const data = await rawResponse.json();
-    setService(data);
-  })();
+  // (async () => {
+  //   const rawResponse = await fetch(
+  //     process.env.REACT_APP_URL + "/front/service/details",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ service_id: id, b: "Textual content" }),
+  //     }
+  //   );
+  //   const data = await rawResponse.json();
+  //   setService(data);
+  // })();
+  const bodyData = {
+    service_id: id,
+  };
+  const headers = {
+    method: "POST",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
 
-  // console.log(service);
+    "Content-Type": "application/json",
+  };
+  const body = JSON.stringify(bodyData);
+  //csutom - fetch hook
+  const {
+    response,
+    error,
+    isLoading,
+    fetchByPost,
+    data: service,
+  } = useFetchPost(
+    process.env.REACT_APP_URL + "/front/service/details",
+    body,
+    headers
+  );
+
+  useEffect(() => {
+    fetchByPost();
+
+    // setService(data);
+  }, [bodyData]);
+
   let ratingLoop = Array.apply(null, { length: service?.data?.rating }).map(
     Number.call,
     Number
   );
+  console.log(response);
   // console.log(ratingLoop);
   const wrapperHeight = "10vh";
+
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -496,23 +533,45 @@ function ServiceDetial() {
                   </MDBModalHeader>
                   <MDBModalBody>
                     <form>
+                      <div className="category-dropdown">
+                        <Dropdown>
+                          <Dropdown.Toggle
+                            variant="success"
+                            id="dropdown-basic"
+                          >
+                            Dropdown Button
+                          </Dropdown.Toggle>
+
+                          <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">
+                              Action
+                            </Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">
+                              Another action
+                            </Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">
+                              Something else
+                            </Dropdown.Item>
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </div>
                       <div className="mb-3">
                         {varyingModal && (
                           <MDBInput
+                            label="Recipient:"
                             value={varyingRecipient}
                             onChange={onChangeRecipient}
                             labelClass="col-form-label"
-                            label="Recipient:"
                           />
                         )}
                       </div>
                       <div className="mb-3">
                         {varyingModal && (
                           <MDBTextArea
+                            label="Message:"
                             value={varyingMessage}
                             onChange={onChangeMessage}
                             labelClass="col-form-label"
-                            label="Message:"
                           />
                         )}
                       </div>
