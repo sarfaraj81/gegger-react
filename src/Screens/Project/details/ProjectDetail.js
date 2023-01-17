@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
@@ -12,27 +12,42 @@ import GermanyFlag from "../../../assets/images/germany.png";
 import { useParams } from "react-router-dom";
 import Wrapper from "../../../Utlilities/Wrapper";
 import Rating from "../../../Components/rating/Rating";
+import useFetchPost from "../../../Hooks/useFetchPost";
 function ProjectDetail() {
-  const [project, setProject] = useState();
+  // const [project, setProject] = useState();
   const { id } = useParams();
-  (async () => {
-    const rawResponse = await fetch(
-      process.env.REACT_APP_URL + "/front/project/details",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ _id: id, b: "Textual content" }),
-      }
-    );
-    const data = await rawResponse.json();
-    setProject(data);
-  })();
 
   // console.log(id);
+  const bodyData = {
+    _id: id,
+  };
+  const headers = {
+    method: "POST",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Content-Type": "application/json",
+  };
+  const body = JSON.stringify(bodyData);
+  //csutom - fetch hook
+  const {
+    response,
+    error,
+    isLoading,
+    fetchByPost,
+    data: project,
+  } = useFetchPost(
+    process.env.REACT_APP_URL + "/front/project/details",
+    body,
+    headers
+  );
 
+  useEffect(() => {
+    fetchByPost();
+
+    // setService(data);
+  }, [id]);
   // console.log(project);
   //rating calculation
   // console.log(service);

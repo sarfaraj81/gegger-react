@@ -68,7 +68,7 @@ function ProjectListing() {
   //     .catch((error) => console.log("error", error));
   // };
   const { response, error, isLoading, fetchByPost, data } = useFetchPost(
-    process.env.REACT_APP_URL + "/front/services",
+    process.env.REACT_APP_URL + "/customer/projects",
     bodyData,
     headers
   );

@@ -48,26 +48,7 @@ function ServiceDetial() {
   const { id } = useParams();
 
   //csutom - fetch hook
-  // const {
-  //   error,
-  //   isPending,
-  //   data: services,
-  // } = useFetch("http://localhost:3010/front/service/details");
-  // (async () => {
-  //   const rawResponse = await fetch(
-  //     process.env.REACT_APP_URL + "/front/service/details",
-  //     {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ service_id: id, b: "Textual content" }),
-  //     }
-  //   );
-  //   const data = await rawResponse.json();
-  //   setService(data);
-  // })();
+
   const bodyData = {
     service_id: id,
   };
@@ -98,7 +79,7 @@ function ServiceDetial() {
     fetchByPost();
 
     // setService(data);
-  }, [bodyData]);
+  }, [id]);
 
   let ratingLoop = Array.apply(null, { length: service?.data?.rating }).map(
     Number.call,
