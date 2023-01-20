@@ -14,7 +14,7 @@ import Home from "./Screens/Home/Home";
 //Service Listing
 
 import ProjectList from "./Screens/Project/List/ProjectList";
-import ServiceDetial from "./Screens/Service/details/ServiceDetail";
+import ServiceDetail from "./Screens/Service/details/ServiceDetail";
 import ProjectDetail from "./Screens/Project/details/ProjectDetail";
 import Admin from "./Screens/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
@@ -63,7 +63,7 @@ function App() {
             <Route path="/services" element={<ServiceList />} />
             <Route path="/services/:id" element={<ServiceList />} />
             <Route path="/projects" element={<ProjectList />} />
-            <Route path="/vendor_detail/:id" element={<ServiceDetial />} />
+            <Route path="/vendor_detail/:id" element={<ServiceDetail />} />
             <Route path="/project_detail/:id" element={<ProjectDetail />} />
             <Route path="/category" element={<Category />} />
           </Routes>

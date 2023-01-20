@@ -47,10 +47,12 @@ const Sidebar = () => {
               <span>Projects</span>
             </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Tickets</span>
-          </li>
+          <Link to="/customer_project_add" style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Add Project</span>
+            </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>

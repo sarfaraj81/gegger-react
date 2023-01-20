@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, DropdownButton, Row } from "react-bootstrap";
 import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
 import { BsPatchCheckFill } from "react-icons/bs";
@@ -12,6 +12,7 @@ import GermanyFlag from "../../../assets/images/germany.png";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Rating from "../../../Components/rating/Rating";
+import usePost from "../../../Hooks/usePost";
 //modal imports
 import {
   MDBBtn,
@@ -25,19 +26,23 @@ import {
   MDBTextArea,
   MDBInput,
 } from "mdb-react-ui-kit";
+import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import Wrapper from "../../../Utlilities/Wrapper";
 import { useSelector } from "react-redux";
 import useFetchPost from "../../../Hooks/useFetchPost";
-import usePost from "../../../Hooks/usePost";
-function ServiceDetial() {
+
+import { useNavigate } from "react-router-dom";
+import { MenuItem } from "@mui/material";
+function ServiceDetail() {
   const [varyingState, setVaryingState] = useState("");
   const [varyingModal, setVaryingModal] = useState(false);
   const [varyingRecipient, setVaryingRecipient] = useState("");
   const [varyingMessage, setVaryingMessage] = useState("");
+  const [project_id, setProjectId] = useState();
   // const [service, setService] = useState(null);
   const getState = useSelector((state) => state);
-
+  const navigate = useNavigate();
   const onChangeRecipient = (event) => {
     setVaryingRecipient(event.target.value);
   };
@@ -45,10 +50,12 @@ function ServiceDetial() {
   const onChangeMessage = (event) => {
     setVaryingMessage(event.target.value);
   };
+  const onChangeProjectId = (e) => {
+    setProjectId(e.target.value);
+  };
+
   const { id } = useParams();
-
-  //csutom - fetch hook
-
+  //custom - fetch hook - for fetching details for services
   const bodyData = {
     service_id: id,
   };
@@ -58,10 +65,17 @@ function ServiceDetial() {
     "Access-Control-Allow-Headers":
       "Origin, X-Requested-With, Content-Type, Accept",
     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-
     "Content-Type": "application/json",
+    token: getState?.userSignin?.userInfo?.data?.token,
   };
   const body = JSON.stringify(bodyData);
+  //fetch for fetching data for modal - proejct lisiting / category id etc
+  const { data: project_data, fetchByPost: fetchFuncation } = useFetchPost(
+    process.env.REACT_APP_URL + "/customer/projects",
+    body,
+    headers
+  );
+
   //csutom - fetch hook
   const {
     response,
@@ -77,18 +91,45 @@ function ServiceDetial() {
 
   useEffect(() => {
     fetchByPost();
-
+    fetchFuncation();
     // setService(data);
   }, [id]);
+
+  const checkStatus = () => {
+    if (!getState?.userSignin?.isLoggedIn) {
+      navigate("/login");
+    }
+    setVaryingState(service?.data?.title);
+  };
 
   let ratingLoop = Array.apply(null, { length: service?.data?.rating }).map(
     Number.call,
     Number
   );
-  console.log(response);
+
   // console.log(ratingLoop);
+  const modalData = {
+    project_id: project_id,
+    service_id: id,
+    message: varyingMessage,
+  };
+  const modalDataString = JSON.stringify(modalData);
+  //function to send modal data to server
+  const { data, fetchByPost: sendModalData } = useFetchPost(
+    process.env.REACT_APP_URL + "/customer/proposal/request",
+
+    modalDataString,
+    headers
+  );
   const wrapperHeight = "10vh";
 
+  // useEffect(() => {
+  //   sendModalData();
+  // }, [modalData]);
+  const modalOnSubmit = () => {
+    sendModalData();
+    setVaryingModal(!varyingModal);
+  };
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -386,6 +427,7 @@ function ServiceDetial() {
                     setVaryingState("@mdo");
                     setVaryingModal(!varyingModal);
                     setVaryingRecipient("@mdo");
+                    checkStatus();
                   }}
                   className="makeoffer"
                 >
@@ -505,7 +547,10 @@ function ServiceDetial() {
               <MDBModalDialog>
                 <MDBModalContent>
                   <MDBModalHeader>
-                    <MDBModalTitle>New message to {varyingState}</MDBModalTitle>
+                    <MDBModalTitle>
+                      New message to{" "}
+                      <span style={{ color: "#6A2FF9" }}>{varyingState}</span>
+                    </MDBModalTitle>
                     <MDBBtn
                       className="btn-close"
                       color="none"
@@ -514,29 +559,21 @@ function ServiceDetial() {
                   </MDBModalHeader>
                   <MDBModalBody>
                     <form>
-                      <div className="category-dropdown">
-                        <Dropdown>
-                          <Dropdown.Toggle
-                            variant="success"
-                            id="dropdown-basic"
-                          >
-                            Dropdown Button
-                          </Dropdown.Toggle>
-
-                          <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">
-                              Action
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">
-                              Another action
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">
-                              Something else
-                            </Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
+                      <div className="category-dropdown mb-4">
+                        <label>Project Name:</label>
+                        <Form.Select
+                          aria-label="Default select example"
+                          onChange={(e) => {
+                            onChangeProjectId(e);
+                          }}
+                        >
+                          <option>Default selction:</option>
+                          {project_data?.data?.map((prj) => (
+                            <option value={prj._id}>{prj.title}</option>
+                          ))}
+                        </Form.Select>
                       </div>
-                      <div className="mb-3">
+                      {/* <div className="mb-3">
                         {varyingModal && (
                           <MDBInput
                             label="Recipient:"
@@ -545,11 +582,11 @@ function ServiceDetial() {
                             labelClass="col-form-label"
                           />
                         )}
-                      </div>
+                      </div> */}
                       <div className="mb-3">
+                        <label>Message:</label>
                         {varyingModal && (
                           <MDBTextArea
-                            label="Message:"
                             value={varyingMessage}
                             onChange={onChangeMessage}
                             labelClass="col-form-label"
@@ -566,7 +603,7 @@ function ServiceDetial() {
                       >
                         Close
                       </MDBBtn>
-                      <MDBBtn>Save changes</MDBBtn>
+                      <MDBBtn onClick={() => modalOnSubmit()}>Submit</MDBBtn>
                     </div>
                   </MDBModalFooter>
                 </MDBModalContent>
@@ -579,4 +616,4 @@ function ServiceDetial() {
   );
 }
 
-export default ServiceDetial;
+export default ServiceDetail;

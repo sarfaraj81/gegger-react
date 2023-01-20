@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Col, Container, Row } from "react-bootstrap";
+
 import Wrapper from "../../../Utlilities/Wrapper";
 import useFetchAndPost from "../../../Hooks/useFetchAndPost";
 import { useSelector } from "react-redux";
@@ -9,6 +10,7 @@ import { useEffect } from "react";
 import useFetchPost from "../../../Hooks/useFetchPost";
 import usePost from "../../../Hooks/usePost";
 import axios from "axios";
+import useFetch from "../../../Hooks/useFetch";
 function AddProject() {
   const [token, setToken] = useState({ token: "" });
   const { userSignin: userInfo } = useSelector((state) => state);
@@ -16,7 +18,12 @@ function AddProject() {
   const wrapperHeight = "11vh";
   const getState = useSelector((state) => state);
   const [dataState, setDataState] = useState();
-
+  const [ids, setIds] = useState({
+    category: "",
+    sub_category: "",
+  });
+  const [categoryId, setCategoryId] = useState();
+  const [subCategoryId, setSubCategoryId] = useState();
   var requestOptions = {
     method: "POST",
     body: JSON.stringify(dataState),
@@ -32,14 +39,41 @@ function AddProject() {
     },
   };
 
-  const { response, error, isLoading, fetchByPost, data } = usePost(
+  const { response, isLoading, fetchByPost, data } = usePost(
     process.env.REACT_APP_URL + "/customer/project/add",
     requestOptions
   );
   useEffect(() => {
+    if (dataState) {
+    }
     fetchByPost();
   }, [dataState, token]);
-  console.log(getState?.userSignin?.userInfo);
+  // console.log(getState?.userSignin?.userInfo);
+
+  const {
+    error,
+    isPending,
+    data: categoryData,
+  } = useFetch(process.env.REACT_APP_URL + "/front/");
+  // console.log("category", categoryData);
+  useEffect(() => {
+    if (categoryData) {
+      console.log(categoryData, "boom");
+    }
+  }, [categoryData]);
+  const captureCatId = (e) => {
+    // setCategoryID(e.target.value);
+    setCategoryId(e.target.value);
+    // setDataState(...dataState, );
+    console.log(ids);
+  };
+  const captureSubcatId = (e) => {
+    // setSubCategoryID(e.target.value);
+    setSubCategoryId(e.target.value);
+    // setSubCategoryID(e.target.value);
+    // setDataState(...dataState);
+    console.log(ids);
+  };
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -58,14 +92,16 @@ function AddProject() {
                 title: "",
                 description: "",
                 budget: "",
-                category: "638b0413a15ec9d0291662ae",
-                sub_category: "638b0413a15ec9d0291662ae",
+                category: "",
+                sub_category: "",
                 location: "",
                 lat: "5.0",
                 long: "4.0",
               }}
               onSubmit={(values, { setSubmitting }) => {
                 // Submit the form
+                values.category = categoryId;
+                values.sub_category = subCategoryId;
                 setDataState(values);
                 if (dataState) {
                   fetchByPost();
@@ -96,19 +132,33 @@ function AddProject() {
                       </Col>
                       <Col md={6} sm={6} lg={6}>
                         <label>Category:</label>
-                        <Field
+                        <select onChange={(e) => captureCatId(e)}>
+                          {categoryData?.data?.categories?.map((cat) => (
+                            <option key={cat._id} value={cat._id}>
+                              {cat.title}
+                            </option>
+                          ))}
+                        </select>
+                        {/* <Field
                           type="text"
                           name="category"
                           placeholder="Category"
-                        />
+                        /> */}
                       </Col>
                       <Col md={6} sm={6} lg={6}>
                         <label>Sub-category:</label>
-                        <Field
+                        <select onChange={(e) => captureSubcatId(e)}>
+                          {categoryData?.data?.categories?.map((cat) => (
+                            <option key={cat._id} value={cat._id}>
+                              {cat.title}
+                            </option>
+                          ))}
+                        </select>
+                        {/* <Field
                           type="text"
                           name="sub_category"
                           placeholder="Sub Category"
-                        />
+                        /> */}
                       </Col>
                       <Col md={6} sm={6} lg={6}>
                         <label>Location</label>
