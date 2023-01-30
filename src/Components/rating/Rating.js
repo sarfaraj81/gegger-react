@@ -33,7 +33,7 @@ function Rating({ rating, maxRating }) {
       </span>
     );
   }
-  return <div>{stars}</div>;
+  return <div className="align-row">{stars}</div>;
 }
 
 export default Rating;

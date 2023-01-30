@@ -471,6 +471,10 @@ $progress-bar-bg:  #6A2FF9;
         align-items: flex-start;
         padding: 0.5em 2em;
         width:100%;
+        .rating-div{
+            display: row !important;
+            padding: 0 !important;
+        }
     .work-history-title{
         p{
             margin: 0;
@@ -1045,4 +1049,8 @@ $progress-bar-bg:  #6A2FF9;
 .custom-dropdown{
     max-height: 120px;
     overflow-y: scroll;
+}
+.align-row{
+    flex-direction: row !important;
+    padding: 0 !important;
 }

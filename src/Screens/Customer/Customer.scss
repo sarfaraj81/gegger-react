@@ -288,3 +288,18 @@ line-height: 41px;
 
     }
   }
+
+  .label-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    select{
+        padding: 0.8em 1em;
+        margin: 0.3em 0.5em 2em 0.5em;
+        width: 100%;
+        border-radius: 3px;
+        border: 1px solid gray;
+
+    }
+   
+  }

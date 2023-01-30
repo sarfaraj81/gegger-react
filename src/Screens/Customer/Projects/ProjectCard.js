@@ -6,8 +6,8 @@ import { BsPeopleFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
-function ProjectCard({ status, count, title, data, category_id }) {
+import moment from "moment";
+function ProjectCard({ status, count, title, data, createdAt, proposalID }) {
   let btnColor = "";
   let textColor = "";
   if (status === "pending approval") {
@@ -45,20 +45,20 @@ function ProjectCard({ status, count, title, data, category_id }) {
           <Col xs={4} md={4}>
             <div className="date-div">
               <BsFillCalendarWeekFill />
-              <p>Posted on 10 july, 2019</p>
+              <p>Posted on: {moment(createdAt).format("DD MMMM YYYY")}</p>
             </div>
           </Col>
           <Col xs={4} md={4}>
             <div className="date-div">
               <BsFillCalendarWeekFill />
-              <p>Posted on 10 july, 2019</p>
+              <p>Completed on: {moment(createdAt).format("DD MMMM YYYY")}</p>
             </div>
           </Col>
         </Row>
         <Row className="mt-3">
           <Col md={12} xs={12}>
             <div className="button-group-dashboard">
-              <Link to={`/customer_proposals/${category_id}`}>
+              <Link to={`/customer_proposals/${proposalID}`}>
                 <button className="purple-button">
                   <span>
                     <BsPeopleFill />

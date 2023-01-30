@@ -13,8 +13,17 @@ import { BsEnvelopeFill } from "react-icons/bs";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BsPeople } from "react-icons/bs";
 import { BsEnvelope } from "react-icons/bs";
+import Rating from "../../../Components/rating/Rating";
 
-function ProposalCard({ status, count }) {
+function ProposalCard({
+  status,
+  verification,
+  title,
+  email,
+  rating,
+  image,
+  redirect,
+}) {
   let btnColor = "";
   let textColor = "";
   if (status === "pending approval") {
@@ -45,14 +54,19 @@ function ProposalCard({ status, count }) {
                 }}
               >
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  // src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  src={image}
                   className="rounded-circle"
                   alt="Avatar"
                 />
 
-                <span className="verification-check-tick">
-                  {<BsCheckCircleFill />}
-                </span>
+                {verification ? (
+                  <span className="verification-check-tick">
+                    {<BsCheckCircleFill />}
+                  </span>
+                ) : (
+                  <></>
+                )}
               </MDBContainer>
             </Nav.Link>
           </Col>
@@ -62,7 +76,8 @@ function ProposalCard({ status, count }) {
                 <Col md={12} xs={12}>
                   <div className="proposal-card-title">
                     <p>
-                      Sindy Forest <span>flag</span>
+                      {title}
+                      {/* <span>flag</span> */}
                     </p>
                   </div>
                 </Col>
@@ -70,39 +85,44 @@ function ProposalCard({ status, count }) {
               <Row>
                 <Col xs={3} md={3}>
                   <div className="icon-with-p">
-                    <BsEnvelopeFill />
-                    <p> sindy@example.com</p>
+                    <span>
+                      <BsEnvelopeFill />
+                    </span>
+                    <p> {email}</p>
                   </div>
                 </Col>
-                <Col xs={6} md={6}>
+                {/* <Col xs={6} md={6}>
                   <div className="icon-with-p">
                     <BsFillTelephoneFill />
-                    <p>(+622)-122-3434</p>
+                    <p>{contact}</p>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
               <Row>
                 <div className="rating-div">
-                  <span>5.0</span>
+                  <span>{rating}</span>
                   <div>
-                    <span>
+                    <Rating rating={rating} maxRating={5} />
+                    {/* <span>
                       {<BsFillStarFill />}
                       {<BsFillStarFill />}
                       {<BsFillStarFill />}
                       {<BsFillStarFill />}
                       {<BsFillStarFill />}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
               </Row>
               <Row>
                 <div className="button-group-proposal">
-                  <button className="view-profile">
-                    <span>
-                      <BsPeople />
-                    </span>
-                    View Profile
-                  </button>
+                  <Link to={`/vendor_detail/${redirect}`}>
+                    <button className="view-profile">
+                      <span>
+                        <BsPeople />
+                      </span>
+                      View Profile
+                    </button>
+                  </Link>
                   <button className="send-message">
                     <span>
                       <BsEnvelope />

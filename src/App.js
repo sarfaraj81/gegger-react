@@ -26,6 +26,7 @@ import Projects from "./Screens/Customer/Projects/Projects";
 import ProtectedRoutes from "./protected.routes";
 import AddProject from "./Screens/Customer/Projects/AddProject";
 import Category from "./Screens/Category/Category";
+import CustomerChat from "./Screens/Customer/Chat/CustomerChat";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -56,6 +57,7 @@ function App() {
                 path="/customer_project_add"
                 element={<AddProject />}
               />
+              <Route exact path="/customer_chat" element={<CustomerChat />} />
             </Route>
 
             <Route path="/login" element={<Login />} />

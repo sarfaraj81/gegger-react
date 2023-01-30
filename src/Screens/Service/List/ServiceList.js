@@ -65,7 +65,7 @@ function ServiceList() {
   useEffect(() => {
     fetchByPost();
   }, [body]);
-
+  console.log(services, "data at service lisitng");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Rating from "../../../Components/rating/Rating";
 import usePost from "../../../Hooks/usePost";
+import moment from "moment";
 //modal imports
 import {
   MDBBtn,
@@ -130,6 +131,8 @@ function ServiceDetail() {
     sendModalData();
     setVaryingModal(!varyingModal);
   };
+  console.log(service, "data at service details");
+  // console.log(service?.data.jobs[0], "jobs");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -143,7 +146,8 @@ function ServiceDetail() {
                   <div className="project-card-avatar">
                     <MDBContainer className="d-flex justify-content-end">
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+                        // src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
+                        src={service?.data?.display_image}
                         className="rounded-circle"
                         style={{ margin: "1em 0px", minHeight: "10vh" }}
                         alt="Avatar"
@@ -195,7 +199,7 @@ function ServiceDetail() {
                   <div className="about-div">
                     <p>About Me</p>
                     <p>
-                      Lorem Ipsum is simply dummy text of the printing and
+                      {/* Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been the industry's
                       standard dummy text ever since the 1500s, when an unknown
                       printer took a galley of type and scrambled it to make a
@@ -205,7 +209,8 @@ function ServiceDetail() {
                       1960s with the release of Letraset sheets containing Lorem
                       Ipsum passages, and more recently with desktop publishing
                       software like Aldus PageMaker including versions of Lorem
-                      Ipsum.
+                      Ipsum. */}
+                      {service?.data?.category?.description}
                     </p>
                   </div>
                 </Col>
@@ -223,38 +228,50 @@ function ServiceDetail() {
                   </div>
                 </Col>
               </Row>
-              <Row>
-                <Col md={12} xs={12}>
-                  <div className="work-history-info">
-                    <div>
-                      <div className="work-history-title">
-                        <p>Water Drain cleaning</p>
-                      </div>
-                      <div className="rating-div2">
-                        <span>5.0</span>
+
+              {service?.data?.jobs.map((ser) => (
+                <>
+                  <Row>
+                    <Col md={12} xs={12}>
+                      <div className="work-history-info">
                         <div>
-                          <span>
+                          <div className="work-history-title">
+                            <p>{ser.project.title}</p>
+                          </div>
+                          <div className="rating-div2">
+                            <span>{ser.review_from_customer.rating}</span>
+                            <div>
+                              {/* <span>
                             {<BsFillStarFill />}
                             {<BsFillStarFill />}
                             {<BsFillStarFill />}
                             {<BsFillStarFill />}
                             {<BsFillStarFill />}
-                          </span>
-                        </div>
-                        <div className="date-time-div">
-                          <span>
-                            <BsFillCalendarFill />
-                          </span>
-                          <p>August 2022</p>
+                          </span> */}
+                              <Rating
+                                rating={ser.review_from_customer.rating}
+                                maxRating={5}
+                              />
+                            </div>
+                            <div className="date-time-div">
+                              <span>
+                                <BsFillCalendarFill />
+                              </span>
+                              <p>
+                                {moment(ser.completed_at).format("MMMM YYYY")}
+                              </p>
+                            </div>
+                          </div>
+                          <div>
+                            <p>{ser.project.description}</p>
+                          </div>
                         </div>
                       </div>
-                      <div>
-                        <p>Clog Cleaning, Leakage fixing and more+</p>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
+                    </Col>
+                  </Row>
+                </>
+              ))}
+
               <Row>
                 <Col md={12} xs={12}>
                   <div className="work-history-info ">

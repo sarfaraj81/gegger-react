@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import Wrapper from "../../../Utlilities/Wrapper";
 import Rating from "../../../Components/rating/Rating";
 import useFetchPost from "../../../Hooks/useFetchPost";
+import moment from "moment";
 function ProjectDetail() {
   // const [project, setProject] = useState();
   const { id } = useParams();
@@ -50,7 +51,7 @@ function ProjectDetail() {
   }, [id]);
   // console.log(project);
   //rating calculation
-  // console.log(service);
+  console.log(project);
   let ratingLoop = Array.apply(null, {
     length: project?.data?.total_rating,
   }).map(Number.call, Number);
@@ -142,7 +143,7 @@ function ProjectDetail() {
                   <div className="about-div">
                     <p>Job description</p>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Proin egestas eros sed dolor auctor tincidunt. Curabitur a
                       nibh et urna auctor pellentesque. Nunc malesuada quis sem
                       sed finibus. Praesent non volutpat nisl. Sed pharetra vel
@@ -175,7 +176,8 @@ function ProjectDetail() {
                       urna. Vivamus accumsan nulla vel arcu volutpat porta.
                       Mauris sodales dictum tortor, a imperdiet enim interdum
                       at. Nulla in elit lectus. Cras et neque vehicula, dictum
-                      nunc quis, pretium quam.
+                      nunc quis, pretium quam. */}
+                      {project?.data?.description}
                     </p>
                   </div>
                 </Col>
@@ -219,7 +221,7 @@ function ProjectDetail() {
                         <BsFillPinMapFill />
                         <div>
                           <p>Location</p>
-                          <p>San Deigo, USA</p>
+                          <p>{project?.data?.location}</p>
                         </div>
                       </div>
                     </div>
@@ -228,7 +230,7 @@ function ProjectDetail() {
                         <BsFillClockFill />
                         <div>
                           <p>Date Posted</p>
-                          <p>2 Days ago</p>
+                          <p>{moment(project?.data?.created_at).fromNow()}</p>
                         </div>
                       </div>
                     </div>

@@ -60,6 +60,7 @@ function ProjectList() {
   useEffect(() => {
     fetchByPost();
   }, []);
+  console.log(projects, "for date");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -217,13 +218,13 @@ function ProjectList() {
               <Row>
                 {projects?.data?.map((project) => (
                   <ProjectCard
-                    key={project.key}
+                    key={project.id}
                     title={project.title}
                     description={project.description}
                     location={project.location}
                     time={time}
                     budget={project.budget}
-                    datePosted={datePosted}
+                    datePosted={project.created_at}
                     id={project._id}
                   />
                 ))}

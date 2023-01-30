@@ -132,9 +132,10 @@ function ProjectListing() {
                       data={d}
                       title={d.title}
                       // status={status}
+                      createdAt={d.created_at}
                       count={count}
                       status={d.status}
-                      category_id={d.category._id}
+                      proposalID={d._id}
                     />
                   </Row>
                 ))}

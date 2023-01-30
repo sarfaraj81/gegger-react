@@ -131,14 +131,17 @@ function AddProject() {
                         <Field type="text" name="budget" placeholder="Budget" />
                       </Col>
                       <Col md={6} sm={6} lg={6}>
-                        <label>Category:</label>
-                        <select onChange={(e) => captureCatId(e)}>
-                          {categoryData?.data?.categories?.map((cat) => (
-                            <option key={cat._id} value={cat._id}>
-                              {cat.title}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="label-div">
+                          <label>Category:</label>
+                          <select onChange={(e) => captureCatId(e)}>
+                            {categoryData?.data?.categories?.map((cat) => (
+                              <option key={cat._id} value={cat._id}>
+                                {cat.title}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
                         {/* <Field
                           type="text"
                           name="category"
@@ -146,14 +149,17 @@ function AddProject() {
                         /> */}
                       </Col>
                       <Col md={6} sm={6} lg={6}>
-                        <label>Sub-category:</label>
-                        <select onChange={(e) => captureSubcatId(e)}>
-                          {categoryData?.data?.categories?.map((cat) => (
-                            <option key={cat._id} value={cat._id}>
-                              {cat.title}
-                            </option>
-                          ))}
-                        </select>
+                        <div className="label-div">
+                          <label>Sub-category:</label>
+                          <select onChange={(e) => captureSubcatId(e)}>
+                            {categoryData?.data?.categories?.map((cat) => (
+                              <option key={cat._id} value={cat._id}>
+                                {cat.title}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+
                         {/* <Field
                           type="text"
                           name="sub_category"

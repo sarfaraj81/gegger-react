@@ -18,6 +18,7 @@ function ServiceCard({
   id,
   subtitle,
   serviceCharge,
+  displayImage,
 }) {
   return (
     <>
@@ -32,7 +33,7 @@ function ServiceCard({
                     style={{ height: "9vh", position: "relative" }}
                   >
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      src={displayImage}
                       className="rounded-circle"
                       alt="Avatar"
                     />
@@ -55,7 +56,7 @@ function ServiceCard({
                   {/* rating div */}
                   <div className="rating-div">
                     <span className="rating-count">{rating}</span>
-                    <div>
+                    <div className="rating-div">
                       <Rating rating={rating} maxRating={5} />
                       {/* <span>
                         {<BsFillStarFill />}

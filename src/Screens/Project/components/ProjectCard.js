@@ -10,6 +10,7 @@ import { BsFillWalletFill } from "react-icons/bs";
 import { BsClockHistory } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import icon101 from "../../../assets/images/icon101.png";
+import moment from "moment";
 function ProjectCard({
   title,
   description,
@@ -87,7 +88,7 @@ function ProjectCard({
                           <span>
                             <BsFillClockFill />
                           </span>
-                          <p>{datePosted} Days ago</p>
+                          <p>{moment(datePosted).fromNow()}</p>
                         </div>
                       </div>
                     </Col>
