@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Wrapper from "../../../Utlilities/Wrapper";
-import Sidebar from "../Components/Sidebar/Sidebar";
-import ProjectListing from "./ProjectListing";
+import Sidebar from "src/Screens/Dashboard/Customer/Components/Sidebar/Sidebar";
+import ProposalListing from "src/Screens/Dashboard/Customer/Proposals/ProposalListing";
+import Wrapper from "src/Utlilities/Wrapper";
+
 const wrapperHeight = "11vh";
-function Projects() {
+function Proposals() {
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -14,7 +15,7 @@ function Projects() {
             <Sidebar />
           </Col>
           <Col xs={10} md={10}>
-            <ProjectListing />
+            <ProposalListing />
           </Col>
         </Row>
       </Container>
@@ -22,4 +23,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default Proposals;

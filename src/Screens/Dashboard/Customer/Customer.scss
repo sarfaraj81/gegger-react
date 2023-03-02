@@ -1,4 +1,4 @@
-@import "../../Utlilities/variables";
+@import "src/Utlilities/variables";
 
 .customer {
     display: flex;
@@ -303,3 +303,31 @@ line-height: 41px;
     }
    
   }
+  .chatmessage {
+    padding: 13px;
+    box-shadow: 0 0 4px 0 #000;
+    border-radius: 5px;
+    width: auto;
+    clear: both;
+    margin-bottom: 10px
+}
+.message-vendor {float: left;}
+.message-customer {float: right;}
+.chatbody {
+    display: inline-block;
+    width: 100%;
+    padding: 25px;
+    box-shadow: 0 0 7px 0 #000;
+    border-radius: 7px;
+    height: 500px;
+    overflow-y: scroll;
+}
+.chatinput textarea{
+    display: inline-block;
+    width: 85%;
+    padding: 15px;
+    box-shadow: 0 0 7px 0 #000;
+    border-radius: 7px;
+    height: 50px;
+}
+

@@ -7,9 +7,9 @@ import {
 } from "mdb-react-ui-kit";
 import { Container, Row, Col } from "react-bootstrap";
 import { BsListStars } from "react-icons/bs";
-import ProposalCard from "./ProposalCard";
+import ProposalCard from "src/Screens/Dashboard/Customer/Proposals/ProposalCard";
 import { useSelector } from "react-redux";
-import useFetchPost from "../../../Hooks/useFetchPost";
+import useFetchPost from "src/Hooks/useFetchPost";
 import { useParams } from "react-router-dom";
 function ProposalListing() {
   const getState = useSelector((state) => state);
@@ -102,7 +102,7 @@ function ProposalListing() {
                     </div>
                   </Col>
                 </Row>
-                {proposals?.data?.proposals.map((pro) => (
+                {proposals?.data?.proposals?.length? proposals.data.proposals.map((pro) => (
                   <Row key={pro._id}>
                     <ProposalCard
                       title={pro.service.vendor.first_name}
@@ -113,7 +113,7 @@ function ProposalListing() {
                       redirect={pro.service._id}
                     />
                   </Row>
-                ))}
+                )): <p>{isLoading?"Loading...":"data not found"}</p>}
                 {/* <Row>
                   <ProposalCard
                     title={title}

@@ -11,9 +11,9 @@ import { BsFillCalendarWeekFill } from "react-icons/bs";
 import { BsPeopleFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { BsTrash } from "react-icons/bs";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "src/Screens/Dashboard/Customer/Projects/ProjectCard";
 import axios from "axios";
-import useFetchPost from "../../../Hooks/useFetchPost";
+import useFetchPost from "src/Hooks/useFetchPost";
 import { useSelector } from "react-redux";
 function ProjectListing() {
   // const btnColor1 = "green";
@@ -23,38 +23,7 @@ function ProjectListing() {
   const [count, setCount] = useState(4);
 
   const getState = useSelector((state) => state);
-  // console.log(
-  //   getState,
-  //   "user data at customer projects"
-  //    getState?.userSignin?.userInfo?.data?.token
-  // );
-  // console.log(getState, "at proejct lsiitng");
-  // const data = {
-  //   title: "testing add api satyam",
-  //   description: "I need expert",
-  //   budget: 150,
-  //   category: "63b2a33561da98130a41eeb9",
-  //   sub_category: "63b2a33561da98130a41eeb9",
-  //   location: "san diego",
-  //   lat: "5.0000",
-  //   long: "70.000",
-  // };
-  // var requestOptions = {
-  //   method: "POST",
-  //   // body: JSON.stringify(data),
-  //   headers: {
-  //     "Access-Control-Allow-Origin": "*",
-  //     "Access-Control-Allow-Headers":
-  //       "Origin, X-Requested-With, Content-Type, Accept",
-  //     "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-  //     "Access-Control-Allow-Credentials": "true",
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-
-  //     token:
-  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzYjJhMmVmNjFkYTk4MTMwYTQxZWViNiIsImZpcnN0X25hbWUiOiJjdXN0b21lcm5ldyIsImVtYWlsIjoiY3VzdG9tZXJuZXdAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkM2pHSm93U1NZSUFwMHFDQUNyN1pZT0l1bFlKMFFrSjYvb05GY0FScVZjUXg0a29WRVJkYi4iLCJ0eXBlIjoidXNlciIsImZjbV90b2tlbiI6W10sImRlbGV0ZWQiOmZhbHNlLCJzdGF0dXMiOiJhY3RpdmUiLCJjcmVhdGVkX2F0IjoiMjAyMy0wMS0wMlQwOToyNTowMy42NjNaIiwiX192IjowfSwiaWF0IjoxNjcyODI1NjI1fQ._unC0kHynMwoYqSD_On2PZFRPPGQbYBfcvr6jzG_Lt0",
-  //   },
-  // };
+  
   const body = {};
   const headers = {
     token: getState?.userSignin?.userInfo?.data?.token,
@@ -126,7 +95,7 @@ function ProjectListing() {
                     </div>
                   </Col>
                 </Row>
-                {data?.data.map((d) => (
+                {data?.data && data.data.length ?data.data.map((d) => (
                   <Row key={d._id}>
                     <ProjectCard
                       data={d}
@@ -138,7 +107,7 @@ function ProjectListing() {
                       proposalID={d._id}
                     />
                   </Row>
-                ))}
+                )): <p>{isLoading?"Loading...":"data not found"}</p>}
                 {/* <Row>
                   <ProjectCard title="" status={status} count={count} />
                 </Row> */}

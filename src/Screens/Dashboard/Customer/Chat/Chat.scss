@@ -47,4 +47,9 @@
     margin: 0 auto;
     text-align: center;
   }
-  
+  .chatbody {
+    box-shadow: 0 0 4px 0 #000;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 500px;
+}

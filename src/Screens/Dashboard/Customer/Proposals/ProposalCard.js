@@ -13,7 +13,7 @@ import { BsEnvelopeFill } from "react-icons/bs";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { BsPeople } from "react-icons/bs";
 import { BsEnvelope } from "react-icons/bs";
-import Rating from "../../../Components/rating/Rating";
+//import Rating from "src/Screens/Dashboard/Components/rating/Rating";
 
 function ProposalCard({
   status,
@@ -102,7 +102,7 @@ function ProposalCard({
                 <div className="rating-div">
                   <span>{rating}</span>
                   <div>
-                    <Rating rating={rating} maxRating={5} />
+                    {/* <Rating rating={rating} maxRating={5} /> */}
                     {/* <span>
                       {<BsFillStarFill />}
                       {<BsFillStarFill />}

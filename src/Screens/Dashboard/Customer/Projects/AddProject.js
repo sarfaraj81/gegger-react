@@ -2,15 +2,15 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { Col, Container, Row } from "react-bootstrap";
 
-import Wrapper from "../../../Utlilities/Wrapper";
-import useFetchAndPost from "../../../Hooks/useFetchAndPost";
+import Wrapper from "src/Utlilities/Wrapper";
+import useFetchAndPost from "src/Hooks/useFetchAndPost";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import useFetchPost from "../../../Hooks/useFetchPost";
-import usePost from "../../../Hooks/usePost";
+import useFetchPost from "src/Hooks/useFetchPost";
+import usePost from "src/Hooks/usePost";
 import axios from "axios";
-import useFetch from "../../../Hooks/useFetch";
+import useFetch from "src/Hooks/useFetch";
 function AddProject() {
   const [token, setToken] = useState({ token: "" });
   const { userSignin: userInfo } = useSelector((state) => state);

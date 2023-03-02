@@ -1,6 +1,7 @@
 import { compose, applyMiddleware, createStore, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { userReducer } from "./reducers/UserReducers";
+import { chatReducer } from "./reducers/ChatReducers";
 
 const userInfo = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -12,10 +13,14 @@ const initialState = {
     userInfo: userInfo,
     isLoggedIn: !!userInfo,
   },
+  NewChats: {
+    proposalNewMessages: {},
+  },
 };
 
 const reducer = combineReducers({
   userSignin: userReducer,
+  NewChats: chatReducer,
 });
 
 const componseEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

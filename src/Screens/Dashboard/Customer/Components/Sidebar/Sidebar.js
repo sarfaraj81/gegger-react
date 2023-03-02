@@ -1,4 +1,4 @@
-import "./Sidebar.scss";
+import "src/Screens/Dashboard/Customer/Components/Sidebar/Sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";

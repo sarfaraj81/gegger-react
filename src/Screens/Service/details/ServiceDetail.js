@@ -37,9 +37,14 @@ import { useNavigate } from "react-router-dom";
 import { MenuItem } from "@mui/material";
 function ServiceDetail() {
   const [varyingState, setVaryingState] = useState("");
+  const [formError, setFormError] = useState([]);
   const [varyingModal, setVaryingModal] = useState(false);
+  const [iscontactRequest, setContactRequest] = useState(false);
+
   const [varyingRecipient, setVaryingRecipient] = useState("");
+  
   const [varyingMessage, setVaryingMessage] = useState("");
+
   const [project_id, setProjectId] = useState();
   // const [service, setService] = useState(null);
   const getState = useSelector((state) => state);
@@ -52,7 +57,11 @@ function ServiceDetail() {
     setVaryingMessage(event.target.value);
   };
   const onChangeProjectId = (e) => {
-    setProjectId(e.target.value);
+    if(e.target.value=='add'){
+      window.open('/customer_project_add','_blank')
+    } else{
+      setProjectId(e.target.value);
+    }
   };
 
   const { id } = useParams();
@@ -92,8 +101,6 @@ function ServiceDetail() {
 
   useEffect(() => {
     fetchByPost();
-    fetchFuncation();
-    // setService(data);
   }, [id]);
 
   const checkStatus = () => {
@@ -127,11 +134,17 @@ function ServiceDetail() {
   // useEffect(() => {
   //   sendModalData();
   // }, [modalData]);
-  const modalOnSubmit = () => {
-    sendModalData();
-    setVaryingModal(!varyingModal);
+  const modalOnSubmit = (e) => {
+    e.preventDefault()
+    if(project_id){
+        sendModalData();
+        setContactRequest(true);        
+        console.log(service, "data at service details");
+    } else{
+      setFormError({"project": "Select Project"});
+    }
+
   };
-  console.log(service, "data at service details");
   // console.log(service?.data.jobs[0], "jobs");
   return (
     <>
@@ -442,13 +455,13 @@ function ServiceDetail() {
                 <MDBBtn
                   onClick={() => {
                     setVaryingState("@mdo");
-                    setVaryingModal(!varyingModal);
+                    setVaryingModal(true);
                     setVaryingRecipient("@mdo");
                     checkStatus();
                   }}
                   className="makeoffer"
                 >
-                  Hire Me
+                  Contact for Service
                 </MDBBtn>
               </div>
               <div className="progress-bar-info-div">
@@ -565,16 +578,16 @@ function ServiceDetail() {
                 <MDBModalContent>
                   <MDBModalHeader>
                     <MDBModalTitle>
-                      New message to{" "}
-                      <span style={{ color: "#6A2FF9" }}>{varyingState}</span>
+                      Contact <span style={{ color: "#6A2FF9" }}>{varyingState}</span>
                     </MDBModalTitle>
                     <MDBBtn
                       className="btn-close"
                       color="none"
-                      onClick={() => setVaryingModal(!varyingModal)}
+                      onClick={() => setVaryingModal(false)}
                     ></MDBBtn>
                   </MDBModalHeader>
                   <MDBModalBody>
+                    {!iscontactRequest? (
                     <form>
                       <div className="category-dropdown mb-4">
                         <label>Project Name:</label>
@@ -583,12 +596,17 @@ function ServiceDetail() {
                           onChange={(e) => {
                             onChangeProjectId(e);
                           }}
+                          onFocus={(e) =>{
+                            fetchFuncation();
+                          }}
                         >
                           <option>Default selction:</option>
+                          <option value='add'>Add Project</option>
                           {project_data?.data?.map((prj) => (
                             <option value={prj._id}>{prj.title}</option>
                           ))}
                         </Form.Select>
+                        <span className="error">{formError?.project}</span>
                       </div>
                       {/* <div className="mb-3">
                         {varyingModal && (
@@ -610,17 +628,17 @@ function ServiceDetail() {
                           />
                         )}
                       </div>
-                    </form>
+                    </form> ):"Thanks for contact"}
                   </MDBModalBody>
                   <MDBModalFooter>
                     <div className="btn-modal-div">
                       <MDBBtn
                         color="secondary"
-                        onClick={() => setVaryingModal(!varyingModal)}
+                        onClick={() => setVaryingModal(false)}
                       >
                         Close
                       </MDBBtn>
-                      <MDBBtn onClick={() => modalOnSubmit()}>Submit</MDBBtn>
+                      { !iscontactRequest?(<MDBBtn onClick={(e) => modalOnSubmit(e)}>Submit</MDBBtn> ):""}
                     </div>
                   </MDBModalFooter>
                 </MDBModalContent>

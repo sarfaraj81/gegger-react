@@ -2,7 +2,6 @@ import React, { Component, Suspense } from "react";
 //Header
 import Header from "./Components/Header/Header";
 //Styling
-import "./index.scss";
 //React Router
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Bootstrap
@@ -20,13 +19,13 @@ import Admin from "./Screens/Admin/Admin";
 import Login from "./Authenticator/Login/Login";
 import Signup from "./Authenticator/Signup/Signup";
 import ServiceList from "./Screens/Service/List/ServiceList";
-import Customer from "./Screens/Customer/Customer";
-import Proposals from "./Screens/Customer/Proposals/Proposals";
-import Projects from "./Screens/Customer/Projects/Projects";
+import CustomerDashboard from "./Screens/Dashboard/Customer/CustomerDashboard/Customer";
+import Proposals from "./Screens/Dashboard/Customer/Proposals/Proposals";
+import Projects from "./Screens/Dashboard/Customer/Projects/Projects";
 import ProtectedRoutes from "./protected.routes";
-import AddProject from "./Screens/Customer/Projects/AddProject";
+import AddProject from "./Screens/Dashboard/Customer/Projects/AddProject";
 import Category from "./Screens/Category/Category";
-import CustomerChat from "./Screens/Customer/Chat/CustomerChat";
+import CustomerChat from "./Screens/Dashboard/Customer/Chat/CustomerChat";
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -44,7 +43,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/" name="dasboard" element={<ProtectedRoutes />}>
               <Route exact path="/admin_dashboard" element={<Admin />} />
-              <Route exact path="/customer_dashboard" element={<Customer />} />
+              <Route exact path="/customer_dashboard" element={<CustomerDashboard />} />
               <Route exact path="/customer_proposals" element={<Proposals />} />
               <Route
                 exact
@@ -57,7 +56,7 @@ function App() {
                 path="/customer_project_add"
                 element={<AddProject />}
               />
-              <Route exact path="/customer_chat" element={<CustomerChat />} />
+              <Route exact path="/customer_chat/:id" element={<CustomerChat />} />
             </Route>
 
             <Route path="/login" element={<Login />} />
