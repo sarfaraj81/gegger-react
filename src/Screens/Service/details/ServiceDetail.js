@@ -1,151 +1,42 @@
-import React, { useState, useEffect } from "react";
+
 import { Col, Container, DropdownButton, Row } from "react-bootstrap";
 import { MDBContainer } from "mdb-react-ui-kit";
 import { BsFillStarFill } from "react-icons/bs";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { BsFillBookmarkStarFill } from "react-icons/bs";
 import { BsFillCalendarFill } from "react-icons/bs";
-import { BsBuilding } from "react-icons/bs";
-import { BsCalendarEvent } from "react-icons/bs";
-
+import useGetPosts from "src/Hooks/useGetPosts";
+import ServiceModal from "../components/ServiceModal";
 import GermanyFlag from "../../../assets/images/germany.png";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Rating from "../../../Components/rating/Rating";
-import usePost from "../../../Hooks/usePost";
 import moment from "moment";
 //modal imports
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-  MDBTextArea,
-  MDBInput,
-} from "mdb-react-ui-kit";
-import Form from "react-bootstrap/Form";
-import Dropdown from "react-bootstrap/Dropdown";
+
 import Wrapper from "../../../Utlilities/Wrapper";
-import { useSelector } from "react-redux";
-import useFetchPost from "../../../Hooks/useFetchPost";
 
-import { useNavigate } from "react-router-dom";
-import { MenuItem } from "@mui/material";
 function ServiceDetail() {
-  const [varyingState, setVaryingState] = useState("");
-  const [formError, setFormError] = useState([]);
-  const [varyingModal, setVaryingModal] = useState(false);
-  const [iscontactRequest, setContactRequest] = useState(false);
 
-  const [varyingRecipient, setVaryingRecipient] = useState("");
-  
-  const [varyingMessage, setVaryingMessage] = useState("");
-
-  const [project_id, setProjectId] = useState();
-  // const [service, setService] = useState(null);
-  const getState = useSelector((state) => state);
-  const navigate = useNavigate();
-  const onChangeRecipient = (event) => {
-    setVaryingRecipient(event.target.value);
-  };
-
-  const onChangeMessage = (event) => {
-    setVaryingMessage(event.target.value);
-  };
-  const onChangeProjectId = (e) => {
-    if(e.target.value=='add'){
-      window.open('/customer_project_add','_blank')
-    } else{
-      setProjectId(e.target.value);
-    }
-  };
 
   const { id } = useParams();
   //custom - fetch hook - for fetching details for services
   const bodyData = {
     service_id: id,
   };
-  const headers = {
-    method: "POST",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers":
-      "Origin, X-Requested-With, Content-Type, Accept",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-    "Content-Type": "application/json",
-    token: getState?.userSignin?.userInfo?.data?.token,
-  };
-  const body = JSON.stringify(bodyData);
-  //fetch for fetching data for modal - proejct lisiting / category id etc
-  const { data: project_data, fetchByPost: fetchFuncation } = useFetchPost(
-    process.env.REACT_APP_URL + "/customer/projects",
-    body,
-    headers
-  );
 
-  //csutom - fetch hook
-  const {
-    response,
-    error,
-    isLoading,
-    fetchByPost,
-    data: service,
-  } = useFetchPost(
-    process.env.REACT_APP_URL + "/front/service/details",
-    body,
-    headers
-  );
-
-  useEffect(() => {
-    fetchByPost();
-  }, [id]);
-
-  const checkStatus = () => {
-    if (!getState?.userSignin?.isLoggedIn) {
-      navigate("/login");
-    }
-    setVaryingState(service?.data?.title);
-  };
+  const service=useGetPosts('service_details',bodyData);
 
   let ratingLoop = Array.apply(null, { length: service?.data?.rating }).map(
     Number.call,
     Number
   );
 
-  // console.log(ratingLoop);
-  const modalData = {
-    project_id: project_id,
-    service_id: id,
-    message: varyingMessage,
-  };
-  const modalDataString = JSON.stringify(modalData);
-  //function to send modal data to server
-  const { data, fetchByPost: sendModalData } = useFetchPost(
-    process.env.REACT_APP_URL + "/customer/proposal/request",
+ 
 
-    modalDataString,
-    headers
-  );
   const wrapperHeight = "10vh";
 
-  // useEffect(() => {
-  //   sendModalData();
-  // }, [modalData]);
-  const modalOnSubmit = (e) => {
-    e.preventDefault()
-    if(project_id){
-        sendModalData();
-        setContactRequest(true);        
-        console.log(service, "data at service details");
-    } else{
-      setFormError({"project": "Select Project"});
-    }
 
-  };
-  // console.log(service?.data.jobs[0], "jobs");
   return (
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
@@ -452,17 +343,7 @@ function ServiceDetail() {
                 </div> */}
               </div>
               <div className="make-offer-btn">
-                <MDBBtn
-                  onClick={() => {
-                    setVaryingState("@mdo");
-                    setVaryingModal(true);
-                    setVaryingRecipient("@mdo");
-                    checkStatus();
-                  }}
-                  className="makeoffer"
-                >
-                  Contact for Service
-                </MDBBtn>
+                <ServiceModal service={service} />
               </div>
               <div className="progress-bar-info-div">
                 <div>
@@ -564,86 +445,6 @@ function ServiceDetail() {
                 </a>
               </div>
             </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={12}>
-            {/* modal */}
-            <MDBModal
-              show={varyingModal}
-              setShow={setVaryingModal}
-              tabIndex="-1"
-            >
-              <MDBModalDialog>
-                <MDBModalContent>
-                  <MDBModalHeader>
-                    <MDBModalTitle>
-                      Contact <span style={{ color: "#6A2FF9" }}>{varyingState}</span>
-                    </MDBModalTitle>
-                    <MDBBtn
-                      className="btn-close"
-                      color="none"
-                      onClick={() => setVaryingModal(false)}
-                    ></MDBBtn>
-                  </MDBModalHeader>
-                  <MDBModalBody>
-                    {!iscontactRequest? (
-                    <form>
-                      <div className="category-dropdown mb-4">
-                        <label>Project Name:</label>
-                        <Form.Select
-                          aria-label="Default select example"
-                          onChange={(e) => {
-                            onChangeProjectId(e);
-                          }}
-                          onFocus={(e) =>{
-                            fetchFuncation();
-                          }}
-                        >
-                          <option>Default selction:</option>
-                          <option value='add'>Add Project</option>
-                          {project_data?.data?.map((prj) => (
-                            <option value={prj._id}>{prj.title}</option>
-                          ))}
-                        </Form.Select>
-                        <span className="error">{formError?.project}</span>
-                      </div>
-                      {/* <div className="mb-3">
-                        {varyingModal && (
-                          <MDBInput
-                            label="Recipient:"
-                            value={varyingRecipient}
-                            onChange={onChangeRecipient}
-                            labelClass="col-form-label"
-                          />
-                        )}
-                      </div> */}
-                      <div className="mb-3">
-                        <label>Message:</label>
-                        {varyingModal && (
-                          <MDBTextArea
-                            value={varyingMessage}
-                            onChange={onChangeMessage}
-                            labelClass="col-form-label"
-                          />
-                        )}
-                      </div>
-                    </form> ):"Thanks for contact"}
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <div className="btn-modal-div">
-                      <MDBBtn
-                        color="secondary"
-                        onClick={() => setVaryingModal(false)}
-                      >
-                        Close
-                      </MDBBtn>
-                      { !iscontactRequest?(<MDBBtn onClick={(e) => modalOnSubmit(e)}>Submit</MDBBtn> ):""}
-                    </div>
-                  </MDBModalFooter>
-                </MDBModalContent>
-              </MDBModalDialog>
-            </MDBModal>
           </Col>
         </Row>
       </Container>

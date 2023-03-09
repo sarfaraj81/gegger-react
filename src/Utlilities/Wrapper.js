@@ -33,13 +33,14 @@ function Wrapper({ wrapperHeight }) {
 
   useEffect(() => {
       socketServcies.initializeSocket()
-      getChatList();   
+      getChatList(); 
+      console.log("wrappercount")  
   }, [])
   useEffect(() => {
       console.log(chatList)
       chatList?.data?.vendors?.map((value,key)=>{
         if(!PID.includes(value._id)){
-          
+          console.log(value._id)
           setPIDInSockets([...PID,value._id])
           socketServcies.on(value._id, (msg) => {
             dispatch({ type: "NEW_MESSAGE", payload: {...msg,proposal_id:value._id} }) 
