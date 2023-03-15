@@ -12,78 +12,56 @@ import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSyst
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link } from "react-router-dom";
+import {useLocation } from 'react-router-dom';
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const Sidebar = () => {
   //   const { dispatch } = useContext(DarkModeContext);
+  const location = useLocation(); 
+  
   return (
     <div className="sidebar">
+      {console.log(location,"testakil")}
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Geegr Customer</span>
-        </Link>
+      
       </div>
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
-          <Link to="/customer_dashboard" style={{ textDecoration: "none" }}>
-            <li>
+          <Link to="/customer_dashboard"   style={{ textDecoration: "none" }}>
+            <li className={location.pathname=="/customer_dashboard"?"active":""}>
               <DashboardIcon className="icon" />
               <span>Dashboard</span>
             </li>
           </Link>
-          <p className="title">LISTS</p>
-          <Link to="/services" style={{ textDecoration: "none" }}>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Service List</span>
+          <Link to="/customer_chat/0" style={{ textDecoration: "none" }}>
+            <li className={location.pathname=="/customer_chat"?"active":""}>
+              <NotificationsNoneIcon className="icon" />
+              <span>Message</span>
             </li>
           </Link>
+
           <Link to="/customer_projects" style={{ textDecoration: "none" }}>
-            <li>
+            <li className={location.pathname=="/customer_projects"?"active":""}>
               <StoreIcon className="icon" />
               <span>Projects</span>
             </li>
           </Link>
           <Link to="/customer_project_add" style={{ textDecoration: "none" }}>
-            <li>
+            <li className={location.pathname=="/customer_project_add"?"active":""}>
               <CreditCardIcon className="icon" />
               <span>Add Project</span>
             </li>
           </Link>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
+          <li className={location.pathname=="/support"?"active":""}>
             <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
+            <span>Support</span>
           </li>
-          <p className="title">SERVICE</p>
 
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
+          <li className={location.pathname=="/settings"?"active":""}>
             <SettingsApplicationsIcon className="icon" />
             <span>Settings</span>
-          </li>
-          <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
-          <li>
-            <ExitToAppIcon className="icon" />
-            <span>Logout</span>
           </li>
         </ul>
       </div>

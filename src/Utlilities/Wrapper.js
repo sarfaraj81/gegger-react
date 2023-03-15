@@ -36,7 +36,6 @@ function Wrapper({ wrapperHeight }) {
       getChatList();   
   }, [])
   useEffect(() => {
-      console.log(chatList)
       chatList?.data?.vendors?.map((value,key)=>{
         if(!PID.includes(value._id)){
           

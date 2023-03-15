@@ -30,14 +30,17 @@ const ActiveUsers = ({ users }) => {
     getChatList();
   },[])
   return (
-    <div className="sidebar chatsidebar">
+    <div className=" chatsidebar">
      <div className="top-message">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">-Message</span>
+          <span className="logo">&lt;- Messages</span>
         </Link>
       </div>
-      <hr />
       <div className="center">
+        <div className="filterproposals">
+          <select><option>All</option></select>
+          <select><option>Select Project</option></select>
+        </div> 
       <ul>
         {chatList?.data?.vendors?.map((username, index) => (
           
@@ -52,15 +55,15 @@ const ActiveUsers = ({ users }) => {
                           position: "relative",
                           //   border: "1px solid black",
                         }}>
-                          <img
+                          <img 
                               // src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
                               src="akil"
                               className="rounded-circle"
-                              alt="Avatar"
+                              
                             />
                         </div>
                     </Col>
-                    <Col md={8} xs={8}>
+                    <Col md={10} xs={10}>
                       <div className=""
                         style={{
                           position: "relative",
