@@ -15,6 +15,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import ChatProposal from 'src/Screens/Dashboard/Customer/Chat/Components/ChatProposal';
+import useSavePosts from "src/Hooks/useSavePosts";
 import { useEffect } from "react";
 
 // import { DarkModeContext } from "../../context/darkModeContext";
@@ -22,17 +23,33 @@ import { useEffect } from "react";
 
 const ChatBody = (type) => {
     const getState = useSelector((state) => state);
-    const [inputs,setInput] = useState({});
     const { id } = useParams();
+    const [inputs,setInput] = useState({proposal_id:id});
+    const [request,sendMessage] = useState({url:'',data:{}});
 
+    const message=useSavePosts(request.url,request.data)
+
+    function SendMessage(){
+        sendMessage({url:'send_message',data:inputs})
+        setInput({...inputs,message:""})
+    }
+    useEffect(()=>{
+        if(inputs.message==''){
+            sendMessage({url:'',data:{}})
+        }
+    },[inputs.message])
+    
     return (<>
         <div className="chatbody">
         {
             getState?.NewChats?.proposalNewMessages[id]?.map((value,index)=>{
                 return (
                     <div className={"chatmessage message-"+ value.type +" message-"+value.from}>
+                       <pre>
+                        
                        {value.type=='message' && value.message}
-                       {value.type=='proposal_update' && (<ChatProposal message={value} />) }   
+                       {value.type=='proposal_update' && (<ChatProposal message={value} />) } 
+                       </pre>  
                     </div>
                     
                 )
@@ -41,8 +58,8 @@ const ChatBody = (type) => {
         }
         </div>
                     <div className="chatinput">
-                <textarea name="chatmessage" onChange={(e) => setInput({...inputs,[inputs.chatMessage]:e.target.value })}>{inputs?.chatMessage}</textarea>
-                <button className="btn btn-info">Send</button>
+                <textarea name="message" onKeyUp={(e) => {  (e.key == "Enter" && !e.shiftKey) && SendMessage() }} onChange={(e) => setInput({...inputs,message:e.target.value })} value={inputs?.message} />
+                <button className="btn btn-info" onClick={(e) => SendMessage()}>Send</button>
             </div>
 
     </>)

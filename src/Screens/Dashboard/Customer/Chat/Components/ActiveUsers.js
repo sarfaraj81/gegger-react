@@ -3,32 +3,14 @@ import { ListGroup } from "react-bootstrap";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetchPost from "src/Hooks/useFetchPost";
+import useGetPosts from "src/Hooks/useGetPosts";
 import { useSelector } from "react-redux";
 // import { DarkModeContext } from "../../context/darkModeContext";
 // import { useContext } from "react";
 
 const ActiveUsers = ({ users }) => {
   const getState = useSelector((state) => state);
-  const bodyData = {};
-  const headers = {
-    method: "POST",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers":
-      "Origin, X-Requested-With, Content-Type, Accept",
-    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-    "Content-Type": "application/json",
-    token: getState?.userSignin?.userInfo?.data?.token,
-  };
-  const body = JSON.stringify(bodyData);
-
-  const { data: chatList, fetchByPost: getChatList } = useFetchPost(
-    process.env.REACT_APP_URL + "/customer/chat/messagelist",
-    body,
-    headers
-  );
-  useEffect(() =>{
-    getChatList();
-  },[])
+  const chatList=useGetPosts("message_list",{})
   return (
     <div className="sidebar chatsidebar">
      <div className="top-message">

@@ -7,6 +7,7 @@ const useGetPosts = (request_url="",request_data={}) => {
   const getState = useSelector((state) => state);
   const urls={
     "proposal_request": "/customer/proposal/request",
+    "send_message": "/customer/chat/send_message",
   }
   const headers = {
     method: "POST",
@@ -32,7 +33,7 @@ const useGetPosts = (request_url="",request_data={}) => {
         .then((data) => setData(data));
     }
 
-  }, [request_url]);
+  }, [request_url,request_data]);
 
   return data;
 };

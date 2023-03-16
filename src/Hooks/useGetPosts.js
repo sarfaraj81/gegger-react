@@ -7,7 +7,8 @@ const useGetPosts = (request_url="",request_data={}) => {
   const getState = useSelector((state) => state);
   const urls={
     "service_details": "/front/service/details",
-    "customer_projects": "/customer/projects"
+    "customer_projects": "/customer/projects",
+    "message_list": "/customer/chat/messagelist"
   }
   const headers = {
     method: "POST",
