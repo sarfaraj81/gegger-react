@@ -25,7 +25,7 @@
     }
   
     .center {
-      padding-left: 10px;
+      padding-left: 0px;
   
       ul {
         list-style: none;
@@ -43,24 +43,31 @@
         li {
           display: flex;
           align-items: center;
-          padding: 5px;
+          padding: 16px 40px;
           cursor: pointer;
-  
-          &:hover {
-            background-color: #ece8ff;
+          
+          &:hover, &.active {
+            background-color: #F0F0F0;
+            span{
+              color:#AD8FF4;
+            }
+            .icon{
+              color:#AD8FF4;
+            }
           }
   
           .icon {
             font-size: 18px;
-            color: #6A2FF9;
+            color: #888;
           }
   
           span{
-              font-size: 13px;
+              font-size: 15px;
               font-weight: 600;
               color: #888;
               margin-left: 10px;
           }
+          
         }
       }
     }

@@ -41,6 +41,7 @@ function ServiceDetail() {
     <>
       <Wrapper wrapperHeight={wrapperHeight} />
       <Container fluid className="top-section-container">
+        {console.log("testtest")}
         {/* top section row */}
         <Row>
           <div id="top-section-row" className="shadow-sm">
